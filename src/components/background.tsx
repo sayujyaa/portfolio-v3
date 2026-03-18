@@ -32,8 +32,9 @@ export function Meteors({
   angle = 215,
   color = "#64748b",
   tailColor = "#64748b",
-  backgroundColor = "#0a0a0f",
+  backgroundColor = "transparent",
 }: MeteorsProps) {
+
   const [meteors, setMeteors] = useState<MeteorData[]>([]);
 
   useEffect(() => {

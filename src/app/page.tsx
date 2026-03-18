@@ -241,7 +241,8 @@ export default function Portfolio() {
 
             <TopNav />
             <Background
-              color="hsl(var(--ui-primary))"
+              color="var(--ui-primary)"
+
               variant={BackgroundVariant.Dots}
               gap={20}
               size={1}
