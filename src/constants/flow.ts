@@ -14,11 +14,11 @@ export const VIEW_CONFIG = {
   PADDING: {
     MOBILE: 0.2,
     DESKTOP: 0.6,
-    INITIAL: { top: 180, bottom: 80, left: 80, right: 80 },
+    INITIAL: { top: 80, bottom: 40, left: 40, right: 40 },
   },
   DURATION: 1200,
   MAX_ZOOM: 2,
-  INITIAL_ZOOM: 0.6,
+  INITIAL_ZOOM: 1.5,
 } as const;
 
 export const SORTED_PROJECTS = [...PROJECTS].sort(
