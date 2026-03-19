@@ -66,6 +66,8 @@ const INITIAL_NODES = [
       tags: p.TAGS,
       link: p.LINK,
       github: p.GITHUB,
+      nextId: i < SORTED_PROJECTS.length - 1 ? SORTED_PROJECTS[i + 1].ID : SORTED_PROJECTS[0].ID,
+      prevId: i > 0 ? SORTED_PROJECTS[i - 1].ID : SORTED_PROJECTS[SORTED_PROJECTS.length - 1].ID,
     },
   })),
 
