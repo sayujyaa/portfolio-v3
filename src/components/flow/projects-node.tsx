@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 export function ExperienceNode() {
   return (
-    <section className="relative px-8 md:px-12 py-10 md:py-12 rounded-[2.5rem] md:rounded-[3.5rem] backdrop-blur-3xl bg-background/40 border border-foreground/10 shadow-2xl w-[calc(100vw-2rem)] md:w-md max-w-120 transition-all duration-700 group overflow-hidden">
+    <section className="relative px-6 md:px-12 py-8 md:py-12 rounded-[2.5rem] md:rounded-[3.5rem] backdrop-blur-3xl bg-background/40 border border-foreground/10 shadow-2xl w-80 md:w-md transition-all duration-700 group overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-ui-primary to-transparent opacity-20" />
 
       <Handle type="target" position={Position.Top} className="opacity-0 w-0 h-0" />

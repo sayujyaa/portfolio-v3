@@ -27,7 +27,6 @@ import { PulsatingEdge } from "@/components/flow/pulsating-edge";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Meteors } from "@/components/background";
 
-
 import { NAV_LINKS, ICONS, PROJECTS, NODE_TYPES as TYPE } from "@/constants";
 
 // --- Flow Configuration Constants ---
@@ -124,9 +123,7 @@ const INITIAL_EDGES: Edge[] = [
     target: "contact-1",
     type: "pulsating",
   },
-
 ];
-
 
 const VIEW_CONFIG = {
   PADDING: {
@@ -208,10 +205,12 @@ export default function Portfolio() {
     [],
   );
 
-  const edgeTypes = useMemo(() => ({
-    pulsating: PulsatingEdge,
-  }), []);
-
+  const edgeTypes = useMemo(
+    () => ({
+      pulsating: PulsatingEdge,
+    }),
+    [],
+  );
 
   const onConnect = useCallback(
     (params: Connection | Edge) => setEdges((eds) => addEdge(params, eds)),
@@ -230,31 +229,24 @@ export default function Portfolio() {
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
           fitView
-
           fitViewOptions={{
             nodes: [{ id: "intro-1" }],
             padding: VIEW_CONFIG.PADDING.INITIAL,
             maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
           }}
-          >
-            <Meteors count={30} />
+        >
+          <Meteors count={30} />
 
-            <TopNav />
-            <Background
-              color="var(--ui-primary)"
-
-              variant={BackgroundVariant.Dots}
-              gap={20}
-              size={1}
-              className="opacity-[0.15]"
-            />
-            <Controls
-              showZoom={false}
-              className="bg-background/80! backdrop-blur-xl! border-foreground/10! rounded-2xl! shadow-2xl! m-8!"
-            />
-            <ThemeSwitcher />
-          </ReactFlow>
-
+          <TopNav />
+          <Background
+            color="var(--ui-primary)"
+            variant={BackgroundVariant.Dots}
+            gap={20}
+            size={1}
+            className="opacity-[0.15]"
+          />
+          <ThemeSwitcher />
+        </ReactFlow>
       </ReactFlowProvider>
     </main>
   );

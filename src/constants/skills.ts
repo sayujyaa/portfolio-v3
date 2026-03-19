@@ -6,14 +6,14 @@ export const SKILLS = {
       VARIANT: "default",
     },
     {
-      TITLE: "Persistence",
-      LIST: ["Node.js", "GraphQL", "Postgres", "Redis"],
+      TITLE: "Server Side",
+      LIST: ["Node.js", "Express"],
       VARIANT: "subtle",
     },
     {
-      TITLE: "Design & Ops",
-      LIST: ["Figma", "Docker", "Git", "Vercel"],
-      VARIANT: "primary",
+      TITLE: "Database",
+      LIST: ["MongoDB", "PostgreSQL", "MySQL"],
+      VARIANT: "subtle",
     },
   ],
 } as const;

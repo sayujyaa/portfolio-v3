@@ -4,7 +4,7 @@ import { PERSONAL_INFO } from "@/constants";
 
 export function CVNode() {
   return (
-    <aside className="group relative px-6 md:px-8 py-5 md:py-6 rounded-[1.5rem] md:rounded-[2rem] backdrop-blur-3xl bg-ui-primary/5 border border-ui-primary/20 shadow-[0_20px_50px_-15px_var(--ui-primary)]/20 w-[calc(100vw-4rem)] md:w-64 cursor-pointer hover:bg-ui-primary/10 transition-all duration-700 hover:-translate-y-2 overflow-hidden">
+    <aside className="group relative px-6 md:px-8 py-5 md:py-6 rounded-[1.5rem] md:rounded-[2rem] backdrop-blur-3xl bg-ui-primary/5 border border-ui-primary/20 shadow-[0_20px_50px_-15px_var(--ui-primary)]/20 w-72 md:w-64 cursor-pointer hover:bg-ui-primary/10 transition-all duration-700 hover:-translate-y-2 overflow-hidden">
       {/* Holographic light streak */}
       <div className="absolute inset-0 bg-linear-to-tr from-transparent via-ui-primary/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
 

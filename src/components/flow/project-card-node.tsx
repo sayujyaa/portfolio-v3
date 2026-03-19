@@ -11,11 +11,11 @@ interface ProjectData {
 
 export function ProjectCardNode({ data }: { data: ProjectData }) {
   return (
-    <article className="relative group p-1 rounded-[1.5rem] md:rounded-[2rem] bg-linear-to-br from-foreground/10 to-transparent hover:from-ui-primary/40 hover:to-ui-primary/10 transition-all duration-700 w-[calc(100vw-2rem)] md:w-96 overflow-hidden">
+    <article className="relative group p-1 rounded-[1.5rem] md:rounded-[2rem] bg-linear-to-br from-foreground/10 to-transparent hover:from-ui-primary/40 hover:to-ui-primary/10 transition-all duration-700 w-80 md:w-96 overflow-hidden">
       <Handle type="target" position={Position.Left} className="opacity-0 w-0 h-0" />
       <Handle type="source" position={Position.Right} className="opacity-0 w-0 h-0" />
 
-      <section className="relative bg-background/90 backdrop-blur-3xl rounded-[1.8rem] p-8 h-full flex flex-col justify-between border border-foreground/5 shadow-2xl">
+      <section className="relative bg-background/90 backdrop-blur-3xl rounded-[1.8rem] p-6 md:p-8 h-full flex flex-col justify-between border border-foreground/5 shadow-2xl">
         <aside className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
           <span className="text-8xl font-black">{data.year.slice(-2)}</span>
         </aside>

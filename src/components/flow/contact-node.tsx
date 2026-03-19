@@ -10,7 +10,7 @@ export function ContactNode() {
   ] as const;
 
   return (
-    <footer className="px-8 py-8 rounded-3xl backdrop-blur-xl bg-foreground/5 border border-foreground/10 shadow-2xl w-[calc(100vw-2rem)] md:w-90 text-center transition-transform hover:-translate-y-2 duration-500 group relative overflow-hidden">
+    <footer className="px-6 py-8 rounded-3xl backdrop-blur-xl bg-foreground/5 border border-foreground/10 shadow-2xl w-72 md:w-90 text-center transition-transform hover:-translate-y-2 duration-500 group relative overflow-hidden">
       <Handle type="target" position={Position.Top} className="opacity-0 w-0 h-0" />
 
       <figure className="inline-block p-4 rounded-2xl bg-ui-primary/10 mb-4 shadow-[0_0_20px_var(--ui-primary)]/20 group-hover:scale-110 transition-transform duration-500">
