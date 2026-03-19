@@ -31,6 +31,8 @@ export function ContactNode() {
           <a
             key={idx}
             href={HREF}
+            target="_blank"
+            rel="noopener noreferrer"
             className="p-3 rounded-full bg-foreground/5 hover:bg-ui-primary/20 hover:text-ui-primary transition-colors duration-300"
           >
             <Icon size={20} />

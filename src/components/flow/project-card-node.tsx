@@ -1,10 +1,11 @@
 import { Handle, Position } from "@xyflow/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
 
 interface ProjectData {
   title: string;
   description: string;
   link?: string;
+  github?: string;
   year: string;
   tags: string[];
 }
@@ -25,12 +26,6 @@ export function ProjectCardNode({ data }: { data: ProjectData }) {
             <span className="px-3 py-1 rounded-full bg-ui-primary/10 text-ui-primary text-[10px] font-black uppercase tracking-widest">
               Project
             </span>
-            <a
-              href={data.link || "#"}
-              className="p-2 rounded-full bg-foreground/5 text-foreground/40 hover:bg-ui-primary hover:text-background transition-all duration-500"
-            >
-              <ArrowUpRight size={18} strokeWidth={3} />
-            </a>
           </header>
 
           <h3 className="text-3xl font-black tracking-tighter mb-4 group-hover:text-ui-primary transition-colors">
@@ -41,14 +36,35 @@ export function ProjectCardNode({ data }: { data: ProjectData }) {
           </p>
         </div>
 
-        <footer className="mt-8">
-          <ul className="flex flex-wrap gap-2">
+        <footer className="mt-8 flex justify-between items-end">
+          <ul className="flex flex-wrap gap-2 max-w-[70%]">
             {data.tags.map((tag) => (
               <li key={tag} className="text-[9px] font-black uppercase tracking-tighter opacity-40 group-hover:opacity-100 transition-opacity">
                 #{tag}
               </li>
             ))}
           </ul>
+
+          <div className="flex gap-1.5 translate-y-1">
+            {data.github && (
+              <a
+                href={data.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-2xl bg-foreground/5 text-foreground/40 hover:bg-ui-primary hover:text-background transition-all duration-500 flex items-center justify-center"
+              >
+                <Github size={16} strokeWidth={3} />
+              </a>
+            )}
+            <a
+              href={data.link || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-2xl bg-foreground/5 text-foreground/40 hover:bg-ui-primary hover:text-background transition-all duration-500 flex items-center justify-center"
+            >
+              <ArrowUpRight size={16} strokeWidth={3} />
+            </a>
+          </div>
         </footer>
       </section>
     </article>

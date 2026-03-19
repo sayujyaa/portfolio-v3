@@ -31,6 +31,10 @@ import { NAV_LINKS, ICONS, PROJECTS, NODE_TYPES as TYPE } from "@/constants";
 
 // --- Flow Configuration Constants ---
 
+const SORTED_PROJECTS = [...PROJECTS].sort(
+  (a, b) => parseInt(b.YEAR) - parseInt(a.YEAR),
+);
+
 const INITIAL_NODES = [
   {
     id: "intro-1",
@@ -52,7 +56,7 @@ const INITIAL_NODES = [
     data: { label: "Experience" },
   },
 
-  ...PROJECTS.map((p, i) => ({
+  ...SORTED_PROJECTS.map((p, i) => ({
     id: p.ID,
     type: TYPE.PROJECT_CARD,
     position: { x: 400 + i * 500, y: 1800 + (i % 2 === 0 ? -60 : 60) },
@@ -62,6 +66,7 @@ const INITIAL_NODES = [
       description: p.DESCRIPTION,
       tags: p.TAGS,
       link: p.LINK,
+      github: p.GITHUB,
     },
   })),
 
@@ -92,25 +97,14 @@ const INITIAL_EDGES: Edge[] = [
     target: "experience-1",
     type: "pulsating",
   },
-  {
-    id: "e3-p1",
-    source: "experience-1",
-    sourceHandle: "projects",
-    target: "project-1",
+  // Project dynamic connections
+  ...SORTED_PROJECTS.map((p, i) => ({
+    id: `e-project-${i}`,
+    source: i === 0 ? "experience-1" : SORTED_PROJECTS[i - 1].ID,
+    sourceHandle: i === 0 ? "projects" : undefined,
+    target: p.ID,
     type: "pulsating",
-  },
-  {
-    id: "ep1-p2",
-    source: "project-1",
-    target: "project-2",
-    type: "pulsating",
-  },
-  {
-    id: "ep2-p3",
-    source: "project-2",
-    target: "project-3",
-    type: "pulsating",
-  },
+  })),
   {
     id: "e3-4",
     source: "experience-1",

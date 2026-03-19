@@ -13,7 +13,7 @@ export function ExperienceNode() {
       <Handle type="source" position={Position.Right} id="projects" className="opacity-0 w-0 h-0" />
 
       {/* Header Section */}
-      <header className="relative z-10 mb-16 px-4">
+      <header className="relative z-10 mb-16">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2.5 rounded-2xl bg-ui-primary/10 text-ui-primary shadow-lg shadow-ui-primary/10">
             <Briefcase size={24} />
@@ -29,15 +29,15 @@ export function ExperienceNode() {
         </p>
       </header>
 
-      <div className="relative z-10 px-4">
-        <div className="absolute left-7 top-0 bottom-0 w-1 bg-linear-to-b from-ui-primary/40 via-ui-primary/10 to-transparent rounded-full" />
+      <div className="relative z-10">
+        <div className="absolute left-5 top-0 bottom-0 w-1 bg-linear-to-b from-ui-primary/40 via-ui-primary/10 to-transparent rounded-full" />
 
         <div className="space-y-16">
           {EXPERIENCE.map((item, idx) => (
-            <article key={idx} className="relative pl-12">
+            <article key={idx} className="relative pl-14">
               <div className={item.IS_ACTIVE ? 
-                "absolute left-1.75 top-1.5 w-6 h-6 -translate-x-1/2 rounded-full border-4 border-background bg-ui-primary shadow-[0_0_20px_var(--ui-primary)] z-10" : 
-                "absolute left-1.75 top-1.5 w-4 h-4 -translate-x-1/2 rounded-full border-4 border-background bg-foreground/30 z-10"
+                "absolute left-5.5 top-1.5 w-6 h-6 -translate-x-1/2 rounded-full border-4 border-background bg-ui-primary shadow-[0_0_20px_var(--ui-primary)] z-10" : 
+                "absolute left-5.5 top-1.5 w-4 h-4 -translate-x-1/2 rounded-full border-4 border-background bg-foreground/30 z-10"
               } />
 
               <div className={cn(

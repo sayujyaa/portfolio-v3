@@ -1,29 +1,41 @@
 export const PROJECTS = [
   {
-    ID: "project-1",
-    TITLE: "Portfolio V3",
+    ID: "project-2",
+    TITLE: "Therafind - Mental Health Hub",
     YEAR: "2024",
     DESCRIPTION:
-      "Infinite canvas portfolio with OKLCH theming and interactive node architecture.",
-    TAGS: ["ReactFlow", "Next.js", "Zustand"],
-    LINK: "#",
-  },
-  {
-    ID: "project-2",
-    TITLE: "AI Workspace",
-    YEAR: "2023",
-    DESCRIPTION:
-      "Cloud-native pair programming environment with integrated LLMs.",
-    TAGS: ["TypeScript", "Docker", "LLM"],
-    LINK: "#",
+      "A social platform dedicated to mental health support and awareness.",
+    TAGS: ["MERN", "TypeScript"],
+    LINK: "https://therafind.vercel.app/",
+    GITHUB: "https://github.com/AyjuYaas/therafind",
   },
   {
     ID: "project-3",
-    TITLE: "Neural Synth",
-    YEAR: "2023",
-    DESCRIPTION: "Generative audio engine powered by deep learning models.",
-    TAGS: ["Python", "WASM", "Web Audio"],
-    LINK: "#",
+    TITLE: "Niraamayae Assistant",
+    YEAR: "2024",
+    DESCRIPTION: "Personal assistant application for health and fitness.",
+    TAGS: ["MERN", "Health"],
+    LINK: "https://niraamayaegym.vercel.app/",
+    GITHUB: "https://github.com/AyjuYaas/niraamayaegym",
+  },
+  {
+    ID: "project-1",
+    TITLE: "Indigo Gallery Kathmandu",
+    YEAR: "2025",
+    DESCRIPTION:
+      "An Art Gallery platform built with MERN stack and TypeScript.",
+    TAGS: ["MERN", "TypeScript"],
+    LINK: "https://indigo-rouge.vercel.app/",
+    GITHUB: "",
+  },
+  {
+    ID: "project-4",
+    TITLE: "Penguina's Mart",
+    YEAR: "2025",
+    DESCRIPTION: "Modern e-commerce platform with Postgres backend.",
+    TAGS: ["Next.js", "Postgres"],
+    LINK: "https://penguinamart.vercel.app/",
+    GITHUB: "https://github.com/AyjuYaas/penguinamart",
   },
 ] as const;
 
