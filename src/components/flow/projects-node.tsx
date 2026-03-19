@@ -1,25 +1,26 @@
-import { Handle, Position } from "@xyflow/react";
+import { Position } from "@xyflow/react";
 import { Briefcase, MapPin } from "lucide-react";
 import { EXPERIENCE } from "@/constants";
 import { cn } from "@/lib/utils";
+import HiddenHandle from "@/components/ui/HiddenHandle";
 
 export function ExperienceNode() {
   return (
-    <section className="relative px-6 md:px-12 py-8 md:py-12 rounded-[2.5rem] md:rounded-[3.5rem] backdrop-blur-3xl bg-background/40 border border-foreground/10 shadow-2xl w-80 md:w-md transition-all duration-700 group overflow-hidden">
+    <main className="relative px-6 md:px-12 py-8 md:py-12 rounded-[2.5rem] md:rounded-[3.5rem] backdrop-blur-3xl bg-background/40 border border-foreground/10 shadow-2xl w-80 md:w-md transition-all duration-700 group overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-ui-primary to-transparent opacity-20" />
 
-      <Handle type="target" position={Position.Top} className="opacity-0 w-0 h-0" />
-      <Handle type="source" position={Position.Bottom} className="opacity-0 w-0 h-0" />
-      <Handle type="source" position={Position.Right} id="projects" className="opacity-0 w-0 h-0" />
+      <HiddenHandle type="target" position={Position.Top} />
+      <HiddenHandle type="source" position={Position.Bottom} />
+      <HiddenHandle type="source" position={Position.Right} id="projects" />
 
       {/* Header Section */}
       <header className="relative z-10 mb-16">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="p-2.5 rounded-2xl bg-ui-primary/10 text-ui-primary shadow-lg shadow-ui-primary/10">
-            <Briefcase size={24} />
-          </div>
-          <div className="h-px flex-1 bg-foreground/10" />
-        </div>
+        <article className="flex items-center gap-3 mb-6">
+          <figure className="p-2.5 rounded-2xl bg-ui-primary/10 text-ui-primary shadow-lg shadow-ui-primary/10">
+            <Briefcase className="size-8" />
+          </figure>
+        </article>
+
         <h2 className="text-4xl font-black tracking-tighter leading-none mb-3">
           Professional <br />
           <span className="text-ui-primary">Journey</span>
@@ -29,21 +30,27 @@ export function ExperienceNode() {
         </p>
       </header>
 
-      <div className="relative z-10">
+      <section className="relative z-10">
         <div className="absolute left-5 top-0 bottom-0 w-1 bg-linear-to-b from-ui-primary/40 via-ui-primary/10 to-transparent rounded-full" />
 
         <div className="space-y-16">
           {EXPERIENCE.map((item, idx) => (
             <article key={idx} className="relative pl-14">
-              <div className={item.IS_ACTIVE ? 
-                "absolute left-5.5 top-1.5 w-6 h-6 -translate-x-1/2 rounded-full border-4 border-background bg-ui-primary shadow-[0_0_20px_var(--ui-primary)] z-10" : 
-                "absolute left-5.5 top-1.5 w-4 h-4 -translate-x-1/2 rounded-full border-4 border-background bg-foreground/30 z-10"
-              } />
+              <div
+                className={
+                  item.IS_ACTIVE
+                    ? "absolute left-5.5 top-0 w-6 h-6 -translate-x-1/2 rounded-full border-4 border-background bg-ui-primary shadow-[0_0_20px_var(--ui-primary)] z-10"
+                    : "absolute left-5.5 top-1.5 w-4 h-4 -translate-x-1/2 rounded-full border-4 border-background bg-foreground/30 z-10"
+                }
+              />
 
-              <div className={cn(
-                "group/item -translate-y-1",
-                !item.IS_ACTIVE && "opacity-60 hover:opacity-100 transition-opacity"
-              )}>
+              <div
+                className={cn(
+                  "group/item -translate-y-1",
+                  !item.IS_ACTIVE &&
+                    "opacity-60 hover:opacity-100 transition-opacity",
+                )}
+              >
                 <header className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-ui-primary mb-2">
                   <span className="px-2 py-0.5 rounded bg-ui-primary/10 italic">
                     {item.YEAR}
@@ -65,7 +72,7 @@ export function ExperienceNode() {
             </article>
           ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }

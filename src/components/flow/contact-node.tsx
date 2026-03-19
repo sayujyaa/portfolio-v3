@@ -1,20 +1,16 @@
-import { Handle, Position } from "@xyflow/react";
-import { Mail, Linkedin, Github, Twitter } from "lucide-react";
-import { PERSONAL_INFO } from "@/constants";
+import { Position } from "@xyflow/react";
+
+import { PERSONAL_INFO, SOCIALS } from "@/constants";
+import { Mail } from "lucide-react";
+import HiddenHandle from "../ui/HiddenHandle";
 
 export function ContactNode() {
-  const SOCIALS = [
-    { ICON: Github, HREF: "#" },
-    { ICON: Linkedin, HREF: "#" },
-    { ICON: Twitter, HREF: "#" },
-  ] as const;
-
   return (
-    <footer className="px-6 py-8 rounded-3xl backdrop-blur-xl bg-foreground/5 border border-foreground/10 shadow-2xl w-72 md:w-90 text-center transition-transform hover:-translate-y-2 duration-500 group relative overflow-hidden">
-      <Handle type="target" position={Position.Top} className="opacity-0 w-0 h-0" />
+    <main className="px-6 py-8 rounded-3xl backdrop-blur-xl bg-foreground/5 border border-foreground/10 shadow-2xl w-72 md:w-90 text-center transition-transform hover:-translate-y-2 duration-500 group relative overflow-hidden">
+      <HiddenHandle type="target" position={Position.Top} />
 
       <figure className="inline-block p-4 rounded-2xl bg-ui-primary/10 mb-4 shadow-[0_0_20px_var(--ui-primary)]/20 group-hover:scale-110 transition-transform duration-500">
-        <Mail size={32} className="text-ui-primary" />
+        <Mail className="text-ui-primary size-10" />
       </figure>
 
       <header>
@@ -26,7 +22,7 @@ export function ContactNode() {
         </p>
       </header>
 
-      <nav className="flex justify-center gap-4">
+      <section className="flex justify-center gap-4">
         {SOCIALS.map(({ ICON: Icon, HREF }, idx) => (
           <a
             key={idx}
@@ -38,11 +34,11 @@ export function ContactNode() {
             <Icon size={20} />
           </a>
         ))}
-      </nav>
+      </section>
 
       <p className="mt-8 text-[9px] font-black uppercase tracking-[0.4em] opacity-20">
         {PERSONAL_INFO.COPYRIGHT}
       </p>
-    </footer>
+    </main>
   );
 }

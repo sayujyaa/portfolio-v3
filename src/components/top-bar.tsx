@@ -14,26 +14,30 @@ interface StatusItemProps {
   className?: string;
 }
 
-const StatusItem = ({ 
-  icon: Icon, 
-  label, 
-  value, 
+const StatusItem = ({
+  icon: Icon,
+  label,
+  value,
   active = false,
-  className = ""
+  className = "",
 }: StatusItemProps) => (
-  <div className={`flex items-center gap-2.5 px-4 h-full border-r border-white/5 last:border-0 hover:bg-white/5 transition-colors group cursor-default whitespace-nowrap ${className}`}>
-    <div className={`p-1.5 rounded-lg shrink-0 ${active ? 'bg-ui-primary/20 text-ui-primary shadow-[0_0_15px_rgba(var(--ui-primary-rgb),0.3)]' : 'bg-white/5 text-foreground/40'} group-hover:scale-110 transition-transform`}>
+  <main
+    className={`flex items-center gap-2.5 px-4 h-full border-r border-white/5 last:border-0 hover:bg-white/5 transition-colors group cursor-default whitespace-nowrap ${className}`}
+  >
+    <figure
+      className={`p-1.5 rounded-lg shrink-0 ${active ? "bg-ui-primary/20 text-ui-primary shadow-[0_0_15px_rgba(var(--ui-primary-rgb),0.3)]" : "bg-white/5 text-foreground/40"} group-hover:scale-110 transition-transform`}
+    >
       <Icon size={12} />
-    </div>
-    <div className="flex items-baseline gap-1.5">
-      <span className="text-[8px] font-black uppercase tracking-widest opacity-20">
+    </figure>
+    <figcaption className="flex items-baseline gap-1.5">
+      <span className="text-[8px] font-black uppercase tracking-widest">
         {label}:
       </span>
       <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/80 group-hover:text-foreground transition-colors">
         {value}
       </span>
-    </div>
-  </div>
+    </figcaption>
+  </main>
 );
 
 export function TopBar() {
@@ -48,7 +52,7 @@ export function TopBar() {
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
-        })
+        }),
       );
     };
     updateTime();
@@ -57,7 +61,10 @@ export function TopBar() {
   }, []);
 
   return (
-    <Panel position="top-center" className="m-4 md:m-8 z-50 pointer-events-none sm:pointer-events-auto w-fit">
+    <Panel
+      position="top-center"
+      className="m-4 md:m-8 z-50 pointer-events-none sm:pointer-events-auto w-fit"
+    >
       <motion.header
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -66,45 +73,56 @@ export function TopBar() {
       >
         <div className="relative group/bar overflow-hidden">
           {/* Main Glass HUD */}
-          <div className="bg-background/20 backdrop-blur-3xl border border-white/10 rounded-full h-10 md:h-12 flex items-center shadow-2xl overflow-hidden">
-            
+          <section className="bg-background/20 backdrop-blur-3xl border border-white/10 rounded-full h-10 md:h-12 flex items-center shadow-2xl overflow-hidden">
             {/* ID Section */}
-            <div className="flex items-center gap-3 pl-5 pr-6 h-full bg-ui-primary/10 border-r border-ui-primary/20 relative group/id cursor-default">
+            <article className="flex items-center gap-3 pl-5 pr-6 h-full bg-ui-primary/10 border-r border-ui-primary/20 relative group/id cursor-default">
               <div className="w-1.5 h-1.5 rounded-full bg-ui-primary animate-pulse" />
               <div className="flex items-baseline gap-2">
                 <span className="text-[11px] font-black tracking-[0.2em]">
                   {PERSONAL_INFO.NAME.toUpperCase()}
                 </span>
-                <span className="text-[8px] font-bold opacity-30 tracking-widest hidden sm:inline">
+                <span className="text-[8px] font-bold opacity-70 tracking-widest hidden sm:inline">
                   CORE_UNIT_V3
                 </span>
               </div>
-            </div>
+            </article>
 
             {/* Hub Data - Desktop */}
             <nav className="hidden lg:flex h-full items-center">
               <StatusItem icon={Zap} label="SYS" value="ACTIVE" active />
-              <StatusItem icon={Globe} label="LOC" value={PERSONAL_INFO.LOCATION} />
+              <StatusItem
+                icon={Globe}
+                label="LOC"
+                value={PERSONAL_INFO.LOCATION}
+              />
             </nav>
 
             {/* Hub Data - Mobile/Tablet (condensed) */}
             <nav className="flex lg:hidden h-full items-center">
-               <StatusItem icon={Zap} label="STATUS" value="READY" active className="px-3" />
+              <StatusItem
+                icon={Zap}
+                label="STATUS"
+                value="READY"
+                active
+                className="px-3"
+              />
             </nav>
 
             {/* Universal Clock */}
-            <div className="flex items-center h-full border-l border-white/5 bg-white/5 pl-5 pr-6 cursor-default">
-              <div className="flex items-center gap-3">
+            <time className="flex items-center h-full border-l border-white/5 bg-white/5 pl-5 pr-6 cursor-default">
+              <article className="flex items-center gap-3">
                 <div className="hidden xs:flex flex-col items-end opacity-20">
-                  <span className="text-[7px] font-black uppercase tracking-widest leading-none">UTC</span>
+                  <span className="text-[7px] font-black uppercase tracking-widest leading-none">
+                    UTC
+                  </span>
                 </div>
+
                 <span className="text-[11px] font-mono font-bold tracking-[0.15em] text-ui-primary/90 drop-shadow-[0_0_8px_var(--ui-primary)]">
                   {time || "--:--:--"}
                 </span>
-              </div>
-            </div>
-
-          </div>
+              </article>
+            </time>
+          </section>
 
           {/* Glitch Overlay Effect on hover */}
           <div className="absolute inset-x-0 bottom-0 h-0.5 bg-ui-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 blur-[1px]" />

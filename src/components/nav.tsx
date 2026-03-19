@@ -26,7 +26,7 @@ export function Nav() {
         setIsOpen(true);
       }
     });
-    
+
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -51,7 +51,6 @@ export function Nav() {
   return (
     <Panel position="bottom-right" className="m-6 z-50 overflow-visible">
       <div className="flex items-end gap-4">
-        
         {/* Navigation Rail */}
         <AnimatePresence>
           {isOpen && (
@@ -67,10 +66,10 @@ export function Nav() {
                   whileHover={{ scale: 1.05, x: -5 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleGoTo(link.ID)}
-                  className="group relative flex items-center gap-4 px-6 py-2.5 rounded-2xl bg-background/95 backdrop-blur-3xl border border-white/20 hover:border-ui-primary/50 hover:bg-ui-primary/5 transition-all text-right shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] overflow-hidden"
+                  className="group relative flex items-center gap-4 px-6 py-2.5 rounded-2xl bg-background/95 backdrop-blur-3xl border border-white/20 hover:border-ui-primary/50 hover:bg-ui-primary/05 transition-all text-right shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] overflow-hidden"
                 >
                   <div className="absolute inset-y-0 right-0 w-1 bg-ui-primary/10 group-hover:bg-ui-primary transition-colors h-1/2 my-auto" />
-                  
+
                   <div className="flex flex-col items-end">
                     <span className="text-[7px] font-black uppercase tracking-[0.4em] opacity-40 leading-none mb-1 group-hover:text-ui-primary group-hover:opacity-100 transition-all">
                       PATH_{idx + 1}
@@ -100,11 +99,14 @@ export function Nav() {
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              {isOpen ? <ChevronRight size={24} strokeWidth={3} /> : <Navigation2 size={24} className="rotate-45" strokeWidth={3} />}
+              {isOpen ? (
+                <ChevronRight size={24} strokeWidth={3} />
+              ) : (
+                <Navigation2 size={24} className="rotate-45" strokeWidth={3} />
+              )}
             </motion.div>
           </AnimatePresence>
         </motion.button>
-
       </div>
     </Panel>
   );

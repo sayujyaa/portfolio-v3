@@ -1,19 +1,20 @@
-import { Handle, Position } from "@xyflow/react";
+import { Position } from "@xyflow/react";
 import { Sparkles } from "lucide-react";
 import { SKILLS } from "@/constants";
 import { cn } from "@/lib/utils";
+import HiddenHandle from "@/components/ui/HiddenHandle";
 
 export function SkillsNode() {
   return (
     <section className="relative px-6 md:px-12 py-8 md:py-12 rounded-[2.5rem] md:rounded-[3rem] backdrop-blur-3xl bg-background/40 border border-foreground/10 shadow-2xl w-80 md:w-140 group overflow-hidden">
       <div className="absolute inset-0 bg-linear-to-b from-transparent via-foreground/2 to-transparent bg-size-[100%_4px] animate-[pulse_4s_ease-in-out_infinite] pointer-events-none" />
 
-      <Handle
+      <HiddenHandle
         type="target"
         position={Position.Top}
         className="opacity-0 w-0 h-0"
       />
-      <Handle
+      <HiddenHandle
         type="source"
         position={Position.Bottom}
         className="opacity-0 w-0 h-0"

@@ -1,11 +1,12 @@
-import { Handle, Position } from "@xyflow/react";
+import { Position } from "@xyflow/react";
 import Image from "next/image";
 import { Caveat } from "next/font/google";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Circle } from "lucide-react";
 import { PERSONAL_INFO } from "@/constants";
 import { cn } from "@/lib/utils";
 
 import myImage from "../../../public/myImage.jpg";
+import HiddenHandle from "../ui/HiddenHandle";
 
 const paintedFont = Caveat({
   subsets: ["latin"],
@@ -17,40 +18,37 @@ export function IntroNode() {
     <section className="relative px-6 md:px-12 py-10 md:py-20 rounded-[3rem] backdrop-blur-3xl bg-background/20 border border-foreground/10 shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible">
       {/* Animated Mesh Aura Background */}
       <figure className="absolute inset-4 -z-10 overflow-hidden rounded-[2.5rem] opacity-30 group-hover:opacity-50 transition-opacity duration-1000">
-        <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] animate-[aura_15s_linear_infinite] bg-[radial-gradient(circle_at_center,var(--ui-primary)_0%,transparent_50%),radial-gradient(circle_at_30%_30%,var(--ui-tail)_0%,transparent_40%),radial-gradient(circle_at_70%_70%,var(--ui-primary)_0%,transparent_40%)] blur-3xl opacity-40" />
+        <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] animate-[aura_15s_linear_infinite] bg-[radial-gradient(circle_at_center,var(--ui-primary)_0%,transparent_50%),radial-gradient(circle_at_30%_30%,var(--ui-tail)_0%,transparent_40%),radial-gradient(circle_at_70%_70%,var(--ui-primary)_0%,transparent_40%)] blur-3xl opacity-40" />
       </figure>
 
       {/* Floating Geometric Embellishments */}
       <aside className="absolute -top-6 -left-6 w-12 h-12 flex items-center justify-center opacity-20 animate-[float_4s_ease-in-out_infinite] group-hover:opacity-100 transition-opacity pointer-events-none">
-        <div className="w-1 h-8 bg-ui-primary rounded-full rotate-45" />
-        <div className="w-1 h-8 bg-ui-primary rounded-full -rotate-45 absolute" />
+        <span className="w-1 h-8 bg-ui-primary rounded-full rotate-45" />
+        <span className="w-1 h-8 bg-ui-primary rounded-full -rotate-45 absolute" />
       </aside>
 
-      <div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full border-2 border-dashed border-ui-primary/30 animate-[spin_8s_linear_infinite] opacity-50 pointer-events-none" />
+      <span className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full border-2 border-dashed border-ui-primary/30 animate-[spin_8s_linear_infinite] opacity-50 pointer-events-none" />
 
       {/* Status Badge */}
-      <address className="absolute -top-4 -right-4 px-5 py-2 rounded-2xl bg-ui-primary text-background text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-ui-primary/40 rotate-6 group-hover:rotate-0 transition-transform duration-700 z-50 not-italic">
-        {PERSONAL_INFO.STATUS}
-      </address>
+      <p className="absolute flex items-center gap-2 -top-4 -right-4 px-5 py-2 rounded-2xl bg-ui-primary text-background text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-ui-primary/40 rotate-6 group-hover:rotate-0 transition-transform duration-700 z-50 not-italic">
+        <PERSONAL_INFO.STATUS.ICON className="size-6" />
+        {PERSONAL_INFO.STATUS.LABEL}
+      </p>
 
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        className="opacity-0 w-0 h-0"
-      />
+      <HiddenHandle type="source" position={Position.Bottom} />
 
       {/* Profile Image */}
       <figure className="relative mx-auto w-48 h-48 mb-12 group-hover:scale-105 transition-transform duration-1000">
         <div className="absolute inset-0 rounded-full border-2 border-ui-primary opacity-20 scale-110 animate-[pulse_3s_ease-in-out_infinite]" />
         <div className="absolute inset-0 rounded-full border-2 border-ui-primary/10 scale-125 animate-[pulse_4s_ease-in-out_infinite_1s]" />
-        <div className="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-[0_0_50px_-10px_var(--ui-primary)]/40 relative z-10 transition-shadow duration-1000 group-hover:shadow-[0_0_80px_0_var(--ui-primary)]/60">
+        <section className="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-[0_0_50px_-10px_var(--ui-primary)]/40 relative z-10 transition-shadow duration-1000 group-hover:shadow-[0_0_80px_0_var(--ui-primary)]/60">
           <Image
             src={myImage}
             alt={PERSONAL_INFO.NAME}
             placeholder="blur"
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
           />
-        </div>
+        </section>
       </figure>
 
       <header className="relative z-10">
@@ -67,25 +65,25 @@ export function IntroNode() {
           {PERSONAL_INFO.ROLE}
         </p>
 
-        <nav className="flex items-center justify-center gap-10 pt-8 border-t border-foreground/5 mb-14 relative overflow-hidden">
-          <article className="flex flex-col items-center">
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 mb-1">
+        <section className="flex items-center justify-center gap-10 pt-8 border-t border-foreground/5 mb-14 relative overflow-hidden">
+          <article className="flex flex-col gap-1 items-center">
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-50">
               Located in
             </span>
-            <time className="text-base font-black opacity-80 uppercase tracking-tighter">
+            <span className="text-base font-black opacity-80 uppercase tracking-tighter">
               {PERSONAL_INFO.LOCATION}
-            </time>
+            </span>
           </article>
-          <div className="w-1.5 h-1.5 rounded-full bg-ui-primary/40" />
-          <article className="flex flex-col items-center">
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 mb-1">
+          <Circle className="size-2 text-ui-primary/40 fill-ui-primary/40" />
+          <article className="flex flex-col gap-1 items-center">
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-50">
               Building for
             </span>
             <span className="text-base font-black opacity-80 uppercase tracking-tighter">
               {PERSONAL_INFO.EXPERIENCE_YEARS}
             </span>
           </article>
-        </nav>
+        </section>
       </header>
 
       {/* Side-Sticking Scroll Tab */}
