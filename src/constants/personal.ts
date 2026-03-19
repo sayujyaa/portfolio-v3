@@ -1,4 +1,4 @@
-import { Mail, Linkedin, Github, Twitter, Lock } from "lucide-react";
+import { Mail, Linkedin, Github, Lock } from "lucide-react";
 
 export const PERSONAL_INFO = {
   NAME: "Sayujya",
