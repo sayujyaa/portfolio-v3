@@ -10,7 +10,8 @@ export const PERSONAL_INFO = {
     ICON: Lock,
   },
   CV_VERSION: "v1.0",
-  CV_SUBTITLE: "PDF",
+  CV_SUBTITLE: "DOWNLOAD PDF",
+  CV_LINK: "/my-cv.pdf",
   CONTACT_SUBTITLE:
     "I'm always open to new opportunities and interesting projects.",
   COPYRIGHT: "Sayujya © 2026",
