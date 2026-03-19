@@ -1,17 +1,14 @@
 "use client";
 
-import { useMemo, useCallback, useState, useEffect } from "react";
+import { useMemo, useCallback } from "react";
 import {
   ReactFlow,
-  Panel,
   useNodesState,
   useEdgesState,
   addEdge,
   Background,
-  Controls,
   Connection,
   Edge,
-  useReactFlow,
   ReactFlowProvider,
   BackgroundVariant,
 } from "@xyflow/react";
@@ -26,8 +23,10 @@ import { ContactNode } from "@/components/flow/contact-node";
 import { PulsatingEdge } from "@/components/flow/pulsating-edge";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Meteors } from "@/components/background";
+import { TopNav } from "@/components/top-nav";
+import { TopBar } from "@/components/top-bar";
 
-import { NAV_LINKS, ICONS, PROJECTS, NODE_TYPES as TYPE } from "@/constants";
+import { PROJECTS, NODE_TYPES as TYPE, VIEW_CONFIG } from "@/constants";
 
 // --- Flow Configuration Constants ---
 
@@ -119,70 +118,6 @@ const INITIAL_EDGES: Edge[] = [
   },
 ];
 
-const VIEW_CONFIG = {
-  PADDING: {
-    MOBILE: 0.2,
-    DESKTOP: 0.6,
-    INITIAL: 0.15,
-  },
-  DURATION: 1200,
-  MAX_ZOOM: 2,
-  INITIAL_ZOOM: 1.2,
-} as const;
-
-function TopNav() {
-  const { fitView } = useReactFlow();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const handleGoTo = (id: string) => {
-    const isStart = id === "intro-1";
-    fitView({
-      nodes: [{ id }],
-      padding: isStart
-        ? VIEW_CONFIG.PADDING.INITIAL
-        : isMobile
-          ? VIEW_CONFIG.PADDING.MOBILE
-          : VIEW_CONFIG.PADDING.DESKTOP,
-      duration: VIEW_CONFIG.DURATION,
-      maxZoom: isStart ? VIEW_CONFIG.INITIAL_ZOOM : VIEW_CONFIG.MAX_ZOOM,
-    });
-  };
-
-  const NavIcon = ICONS.ROCKET;
-
-  return (
-    <Panel
-      position="top-right"
-      className="bg-background/80 backdrop-blur-3xl border border-foreground/10 px-4 md:px-6 py-2 md:py-3 rounded-full flex items-center gap-3 md:gap-6 shadow-2xl m-4 md:m-8 z-50 transition-all"
-    >
-      <div className="items-center gap-2 text-foreground/30 hidden sm:flex">
-        <NavIcon size={16} />
-        <span className="text-[9px] font-black uppercase tracking-[0.3em]">
-          Navigation
-        </span>
-      </div>
-      <nav className="flex gap-1 md:gap-2">
-        {NAV_LINKS.map((link) => (
-          <button
-            key={link.ID}
-            onClick={() => handleGoTo(link.ID)}
-            className="px-3 md:px-4 py-1 md:py-1.5 rounded-full text-[9px] md:text-[10px] font-black tracking-widest hover:bg-ui-primary hover:text-background transition-all uppercase"
-          >
-            {link.LABEL}
-          </button>
-        ))}
-      </nav>
-    </Panel>
-  );
-}
-
 export default function Portfolio() {
   const [nodes, , onNodesChange] = useNodesState([...INITIAL_NODES]);
   const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
@@ -232,6 +167,7 @@ export default function Portfolio() {
           <Meteors count={30} />
 
           <TopNav />
+          <TopBar />
           <Background
             color="var(--ui-primary)"
             variant={BackgroundVariant.Dots}
