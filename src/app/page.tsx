@@ -63,6 +63,7 @@ export default function Portfolio() {
   return (
     <main className="w-full h-screen bg-background text-foreground overflow-hidden selection:bg-ui-primary selection:text-background">
       <ReactFlowProvider>
+        <Nav />
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -80,7 +81,6 @@ export default function Portfolio() {
         >
           <Meteors count={30} />
 
-          <Nav />
           <TopBar />
           <Background
             color="var(--ui-primary)"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Panel, useReactFlow } from "@xyflow/react";
+import { useReactFlow } from "@xyflow/react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronRight, Navigation2 } from "lucide-react";
 import { NAV_LINKS, VIEW_CONFIG } from "@/constants";
@@ -36,10 +36,16 @@ export function Nav() {
 
   const handleGoTo = (id: string) => {
     const isStart = id === "intro-1";
+    
+    // Custom padding for the start node to push it down away from the top bar
+    const startPadding = isMobile
+      ? { top: 120, bottom: 40, left: 40, right: 40 }
+      : { top: 200, bottom: 100, left: 100, right: 100 };
+
     fitView({
       nodes: [{ id }],
       padding: isStart
-        ? VIEW_CONFIG.PADDING.INITIAL
+        ? startPadding
         : isMobile
           ? VIEW_CONFIG.PADDING.MOBILE
           : VIEW_CONFIG.PADDING.DESKTOP,
@@ -49,7 +55,7 @@ export function Nav() {
   };
 
   return (
-    <Panel position="bottom-right" className="m-6 z-50 overflow-visible">
+    <main className="fixed bottom-6 right-6 z-50 overflow-visible">
       <div className="flex items-end gap-4">
         {/* Navigation Rail */}
         <AnimatePresence>
@@ -66,7 +72,7 @@ export function Nav() {
                   whileHover={{ scale: 1.05, x: -5 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleGoTo(link.ID)}
-                  className="group relative flex items-center gap-4 px-6 py-2.5 rounded-2xl bg-background/95 backdrop-blur-3xl border border-white/20 hover:border-ui-primary/50 hover:bg-ui-primary/05 transition-all text-right shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] overflow-hidden"
+                  className="group relative flex items-center gap-4 px-6 py-2.5 rounded-2xl bg-background/95 backdrop-blur-3xl border border-white/20 hover:border-ui-primary/50 hover:bg-ui-primary/5 transition-all text-right shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] overflow-hidden"
                 >
                   <div className="absolute inset-y-0 right-0 w-1 bg-ui-primary/10 group-hover:bg-ui-primary transition-colors h-1/2 my-auto" />
 
@@ -108,6 +114,6 @@ export function Nav() {
           </AnimatePresence>
         </motion.button>
       </div>
-    </Panel>
+    </main>
   );
 }

@@ -15,7 +15,7 @@ const paintedFont = Caveat({
 
 export function IntroNode() {
   return (
-    <section className="relative px-6 md:px-12 py-10 md:py-20 rounded-[3rem] backdrop-blur-3xl bg-background/20 border border-foreground/10 shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible">
+    <section className="relative px-6 md:px-12 py-8 md:py-16 rounded-[3rem] backdrop-blur-3xl bg-background/20 border border-foreground/10 shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible">
       {/* Animated Mesh Aura Background */}
       <figure className="absolute inset-4 -z-10 overflow-hidden rounded-[2.5rem] opacity-30 group-hover:opacity-50 transition-opacity duration-1000">
         <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] animate-[aura_15s_linear_infinite] bg-[radial-gradient(circle_at_center,var(--ui-primary)_0%,transparent_50%),radial-gradient(circle_at_30%_30%,var(--ui-tail)_0%,transparent_40%),radial-gradient(circle_at_70%_70%,var(--ui-primary)_0%,transparent_40%)] blur-3xl opacity-40" />
@@ -38,7 +38,7 @@ export function IntroNode() {
       <HiddenHandle type="source" position={Position.Bottom} />
 
       {/* Profile Image */}
-      <figure className="relative mx-auto w-48 h-48 mb-12 group-hover:scale-105 transition-transform duration-1000">
+      <figure className="relative mx-auto w-48 h-48 mb-8 group-hover:scale-105 transition-transform duration-1000">
         <div className="absolute inset-0 rounded-full border-2 border-ui-primary opacity-20 scale-110 animate-[pulse_3s_ease-in-out_infinite]" />
         <div className="absolute inset-0 rounded-full border-2 border-ui-primary/10 scale-125 animate-[pulse_4s_ease-in-out_infinite_1s]" />
         <section className="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-[0_0_50px_-10px_var(--ui-primary)]/40 relative z-10 transition-shadow duration-1000 group-hover:shadow-[0_0_80px_0_var(--ui-primary)]/60">
@@ -55,17 +55,17 @@ export function IntroNode() {
         <h1
           className={cn(
             paintedFont.className,
-            "text-8xl md:text-9xl font-black bg-clip-text text-transparent bg-linear-to-b from-ui-primary via-foreground to-foreground/70 tracking-tighter leading-none pb-2 mb-8 transform -rotate-1 group-hover:rotate-0 transition-transform duration-1000 drop-shadow-2xl",
+            "text-8xl md:text-9xl font-black bg-clip-text text-transparent bg-linear-to-b from-ui-primary via-foreground to-foreground/70 tracking-tighter leading-none pb-2 mb-4 transform -rotate-1 group-hover:rotate-0 transition-transform duration-1000 drop-shadow-2xl",
           )}
         >
           Hello, I&apos;m {PERSONAL_INFO.NAME}.
         </h1>
 
-        <p className="text-sm text-foreground/40 font-black uppercase tracking-[1em] mb-12 group-hover:tracking-[1.2em] transition-all duration-1000 scale-90 md:scale-100">
+        <p className="text-sm text-foreground/40 font-black uppercase tracking-[1em] mb-8 group-hover:tracking-[1.2em] transition-all duration-1000 scale-90 md:scale-100">
           {PERSONAL_INFO.ROLE}
         </p>
 
-        <section className="flex items-center justify-center gap-10 pt-8 border-t border-foreground/5 mb-14 relative overflow-hidden">
+        <section className="flex items-center justify-center gap-10 pt-8 border-t border-foreground/5 mb-10 relative overflow-hidden">
           <article className="flex flex-col gap-1 items-center">
             <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-50">
               Located in

@@ -14,11 +14,11 @@ export const VIEW_CONFIG = {
   PADDING: {
     MOBILE: 0.2,
     DESKTOP: 0.6,
-    INITIAL: 0.15,
+    INITIAL: { top: 180, bottom: 80, left: 80, right: 80 },
   },
   DURATION: 1200,
   MAX_ZOOM: 2,
-  INITIAL_ZOOM: 1.2,
+  INITIAL_ZOOM: 0.6,
 } as const;
 
 export const SORTED_PROJECTS = [...PROJECTS].sort(
@@ -57,8 +57,14 @@ export const INITIAL_NODES = [
       tags: p.TAGS,
       link: p.LINK,
       github: p.GITHUB,
-      nextId: i < SORTED_PROJECTS.length - 1 ? SORTED_PROJECTS[i + 1].ID : SORTED_PROJECTS[0].ID,
-      prevId: i > 0 ? SORTED_PROJECTS[i - 1].ID : SORTED_PROJECTS[SORTED_PROJECTS.length - 1].ID,
+      nextId:
+        i < SORTED_PROJECTS.length - 1
+          ? SORTED_PROJECTS[i + 1].ID
+          : SORTED_PROJECTS[0].ID,
+      prevId:
+        i > 0
+          ? SORTED_PROJECTS[i - 1].ID
+          : SORTED_PROJECTS[SORTED_PROJECTS.length - 1].ID,
     },
   })),
 
