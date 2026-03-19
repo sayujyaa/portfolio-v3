@@ -4,7 +4,7 @@ import { useState, useEffect, ElementType } from "react";
 import { Panel } from "@xyflow/react";
 import { motion } from "motion/react";
 import { Globe, Zap } from "lucide-react";
-import { PERSONAL_INFO, ICONS } from "@/constants";
+import { PERSONAL_INFO } from "@/constants";
 
 interface StatusItemProps {
   icon: ElementType;
@@ -55,8 +55,6 @@ export function TopBar() {
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);
-
-  const NavIcon = ICONS.ROCKET;
 
   return (
     <Panel position="top-center" className="m-4 md:m-8 z-50 pointer-events-none sm:pointer-events-auto w-fit">
@@ -109,7 +107,7 @@ export function TopBar() {
           </div>
 
           {/* Glitch Overlay Effect on hover */}
-          <div className="absolute inset-x-0 bottom-0 h-[2px] bg-ui-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 blur-[1px]" />
+          <div className="absolute inset-x-0 bottom-0 h-0.5 bg-ui-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 blur-[1px]" />
         </div>
       </motion.header>
     </Panel>

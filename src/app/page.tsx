@@ -23,7 +23,7 @@ import { ContactNode } from "@/components/flow/contact-node";
 import { PulsatingEdge } from "@/components/flow/pulsating-edge";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Meteors } from "@/components/background";
-import { TopNav } from "@/components/top-nav";
+import { Nav } from "@/components/nav";
 import { TopBar } from "@/components/top-bar";
 
 import { PROJECTS, NODE_TYPES as TYPE, VIEW_CONFIG } from "@/constants";
@@ -166,7 +166,7 @@ export default function Portfolio() {
         >
           <Meteors count={30} />
 
-          <TopNav />
+          <Nav />
           <TopBar />
           <Background
             color="var(--ui-primary)"
