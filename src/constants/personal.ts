@@ -23,5 +23,5 @@ export const SOCIALS = [
     ICON: Linkedin,
     HREF: "https://www.linkedin.com/in/sayujya-satyal-3452b5217/",
   },
-  { ICON: Mail, HREF: "mailto:[sayujya57@gmail.com]" },
+  { ICON: Mail, HREF: "mailto:sayujya57@gmail.com" },
 ] as const;
