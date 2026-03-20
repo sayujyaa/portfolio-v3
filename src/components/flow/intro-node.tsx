@@ -1,4 +1,7 @@
-import { Position } from "@xyflow/react";
+"use client";
+
+import { useCallback } from "react";
+import { Position, useNodeId, useReactFlow } from "@xyflow/react";
 import Image from "next/image";
 import { Caveat } from "next/font/google";
 import { ChevronDown, Circle } from "lucide-react";
@@ -14,8 +17,38 @@ const paintedFont = Caveat({
 });
 
 export function IntroNode() {
+  const { fitBounds, getNodesBounds } = useReactFlow();
+  const nodeId = useNodeId();
+
+  const focusCard = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      window.setTimeout(() => {
+        const id = nodeId ?? "intro-1";
+        const b = getNodesBounds([id]);
+        const mobile = window.innerWidth < 768;
+        const trim = mobile
+          ? { L: 16, R: 64, T: 48, B: 56 }
+          : { L: 20, R: 80, T: 56, B: 60 };
+
+        const tight = {
+          x: b.x + trim.L,
+          y: b.y + trim.T,
+          width: Math.max(120, b.width - trim.L - trim.R),
+          height: Math.max(120, b.height - trim.T - trim.B),
+        };
+
+        void fitBounds(tight, { padding: 0.08, duration: 800 });
+      }, 50);
+    },
+    [fitBounds, getNodesBounds, nodeId],
+  );
+
   return (
-    <section className="relative px-6 md:px-12 py-8 md:py-16 rounded-[3rem] backdrop-blur-3xl bg-background/20 border border-foreground/10 shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible">
+    <section
+      className="relative px-6 md:px-12 py-8 md:py-16 rounded-[3rem] backdrop-blur-3xl bg-background/20 border border-foreground/10 shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible nodrag cursor-pointer"
+      onClick={focusCard}
+    >
       {/* Animated Mesh Aura Background */}
       <figure className="absolute inset-4 -z-10 overflow-hidden rounded-[2.5rem] opacity-30 group-hover:opacity-50 transition-opacity duration-1000">
         <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] animate-[aura_15s_linear_infinite] bg-[radial-gradient(circle_at_center,var(--ui-primary)_0%,transparent_50%),radial-gradient(circle_at_30%_30%,var(--ui-tail)_0%,transparent_40%),radial-gradient(circle_at_70%_70%,var(--ui-primary)_0%,transparent_40%)] blur-3xl opacity-40" />

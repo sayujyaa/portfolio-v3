@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useReactFlow } from "@xyflow/react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronRight, Navigation2 } from "lucide-react";
@@ -8,51 +8,34 @@ import { NAV_LINKS, VIEW_CONFIG } from "@/constants";
 
 export function Nav() {
   const { fitView } = useReactFlow();
-  const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const isNowMobile = window.innerWidth < 768;
-      setIsMobile(isNowMobile);
-    };
+  const handleGoTo = useCallback(
+    (id: string) => {
+      window.setTimeout(() => {
+        void fitView({
+          nodes: [{ id }],
+          duration: 800,
+          padding: VIEW_CONFIG.NODE_FOCUS_PADDING,
+          maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
+        });
+      }, 50);
+    },
+    [fitView],
+  );
 
+  useEffect(() => {
     // Initialize in Next.js safely by deferring to the next frame
     // This avoids the "synchronous setState in effect" cascading render warning
     const rafId = requestAnimationFrame(() => {
       const isStartMobile = window.innerWidth < 768;
-      setIsMobile(isStartMobile);
-      if (!isStartMobile) {
-        setIsOpen(true);
-      }
+      setIsOpen(!isStartMobile);
     });
 
-    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(rafId);
     };
   }, []);
-
-  const handleGoTo = (id: string) => {
-    const isStart = id === "intro-1";
-    
-    // Custom padding for the start node to push it down away from the top bar
-    const startPadding = isMobile
-      ? { top: 120, bottom: 40, left: 40, right: 40 }
-      : { top: 200, bottom: 100, left: 100, right: 100 };
-
-    fitView({
-      nodes: [{ id }],
-      padding: isStart
-        ? startPadding
-        : isMobile
-          ? VIEW_CONFIG.PADDING.MOBILE
-          : VIEW_CONFIG.PADDING.DESKTOP,
-      duration: VIEW_CONFIG.DURATION,
-      maxZoom: isStart ? VIEW_CONFIG.INITIAL_ZOOM : VIEW_CONFIG.MAX_ZOOM,
-    });
-  };
 
   return (
     <main className="fixed bottom-6 right-6 z-50 overflow-visible">

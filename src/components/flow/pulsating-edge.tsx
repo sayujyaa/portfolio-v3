@@ -42,6 +42,12 @@ export function PulsatingEdge({
           filter: drop-shadow(0 0 10px var(--ui-primary)) drop-shadow(0 0 2px #fff);
         }
 
+        @media (max-width: 768px) {
+          .moving-dots {
+            filter: none;
+          }
+        }
+
         @keyframes march {
           from {
             stroke-dashoffset: 80;

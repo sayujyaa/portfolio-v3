@@ -3,7 +3,7 @@
 import { useState, useEffect, ElementType } from "react";
 import { Panel } from "@xyflow/react";
 import { motion } from "motion/react";
-import { Globe, Zap } from "lucide-react";
+import { Circle, Globe, Plus, Zap } from "lucide-react";
 import { PERSONAL_INFO } from "@/constants";
 
 interface StatusItemProps {
@@ -63,7 +63,7 @@ export function TopBar() {
   return (
     <Panel
       position="top-center"
-      className="m-4 md:m-8 z-50 pointer-events-none sm:pointer-events-auto w-fit"
+      className="m-4 md:m-8 z-50 pointer-events-none sm:pointer-events-auto w-fit bg-transparent!"
     >
       <motion.header
         initial={{ y: -50, opacity: 0 }}
@@ -87,31 +87,27 @@ export function TopBar() {
               </div>
             </article>
 
-            {/* Hub Data - Desktop */}
-            <nav className="hidden lg:flex h-full items-center">
-              <StatusItem icon={Zap} label="SYS" value="ACTIVE" active />
+            {/* Hub Data - Mobile/Desktop */}
+            <nav className="flex h-full items-center">
+              <StatusItem
+                icon={Zap}
+                label="SYS"
+                value="ACTIVE"
+                active
+                className="px-3 md:px-4"
+              />
               <StatusItem
                 icon={Globe}
                 label="LOC"
                 value={PERSONAL_INFO.LOCATION}
+                className="hidden xs:flex px-3 md:px-4"
               />
             </nav>
 
-            {/* Hub Data - Mobile/Tablet (condensed) */}
-            <nav className="flex lg:hidden h-full items-center">
-              <StatusItem
-                icon={Zap}
-                label="STATUS"
-                value="READY"
-                active
-                className="px-3"
-              />
-            </nav>
-
-            {/* Universal Clock */}
-            <time className="flex items-center h-full border-l border-white/5 bg-white/5 pl-5 pr-6 cursor-default">
+            {/* Universal Clock - Desktop Only */}
+            <time className="hidden sm:flex items-center h-full border-l border-white/5 bg-white/5 pl-5 pr-6 cursor-default">
               <article className="flex items-center gap-3">
-                <div className="hidden xs:flex flex-col items-end opacity-20">
+                <div className="hidden lg:flex flex-col items-end opacity-20">
                   <span className="text-[7px] font-black uppercase tracking-widest leading-none">
                     UTC
                   </span>
@@ -127,6 +123,25 @@ export function TopBar() {
           {/* Glitch Overlay Effect on hover */}
           <div className="absolute inset-x-0 bottom-0 h-0.5 bg-ui-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 blur-[1px]" />
         </div>
+
+        {/* Navigation Instructions HUD */}
+        <aside className="absolute -bottom-10 hidden md:flex items-center gap-6 px-6 py-2 rounded-full border border-white/5 bg-background/5 backdrop-blur-3xl opacity-30 group-hover/bar:opacity-100 transition-all duration-700 pointer-events-none scale-95 group-hover/bar:scale-100">
+          <article className="flex items-center">
+            <span className="text-[8px] font-black uppercase tracking-[0.2em] px-1">
+              Scroll
+            </span>
+            <Plus className="size-2.5 stroke-3" />
+            <span className="text-[8px] font-black uppercase tracking-[0.2em] px-1">
+              Pan
+            </span>
+          </article>
+          <Circle className="size-2 fill-ui-primary" />
+          <article className="flex items-center gap-2">
+            <span className="text-[8px] font-black uppercase tracking-[0.2em]">
+              Ctrl / Cmd + Scroll to Zoom · Drag to Move
+            </span>
+          </article>
+        </aside>
       </motion.header>
     </Panel>
   );

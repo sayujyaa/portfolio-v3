@@ -11,6 +11,7 @@ import {
   Edge,
   ReactFlowProvider,
   BackgroundVariant,
+  PanOnScrollMode,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
@@ -63,7 +64,6 @@ export default function Portfolio() {
   return (
     <main className="w-full h-screen bg-background text-foreground overflow-hidden selection:bg-ui-primary selection:text-background">
       <ReactFlowProvider>
-        <Nav />
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -72,13 +72,19 @@ export default function Portfolio() {
           onConnect={onConnect}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
+          minZoom={0.2}
+          maxZoom={VIEW_CONFIG.MAX_ZOOM}
+          panOnScroll
+          panOnScrollMode={PanOnScrollMode.Free}
           fitView
           fitViewOptions={{
+            padding: VIEW_CONFIG.NODE_FOCUS_PADDING,
             nodes: [{ id: "intro-1" }],
-            padding: VIEW_CONFIG.PADDING.INITIAL,
             maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
           }}
+          onlyRenderVisibleElements
         >
+          <Nav />
           <Meteors count={30} />
 
           <TopBar />
