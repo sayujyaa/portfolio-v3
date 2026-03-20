@@ -1,9 +1,7 @@
 "use client";
 
-import { useState, useEffect, ElementType } from "react";
-import { Panel } from "@xyflow/react";
-import { motion } from "motion/react";
-import { Circle, Globe, Plus, Zap } from "lucide-react";
+import { useState, useEffect, useRef, ElementType } from "react";
+import { Circle, Globe, Plus, Zap, Info } from "lucide-react";
 import { PERSONAL_INFO } from "@/constants";
 
 interface StatusItemProps {
@@ -42,6 +40,22 @@ const StatusItem = ({
 
 export function TopBar() {
   const [time, setTime] = useState("");
+  const [isInsightOpen, setIsInsightOpen] = useState(false);
+  const insightRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (insightRef.current && !insightRef.current.contains(event.target as Node)) {
+        setIsInsightOpen(false);
+      }
+    };
+    if (isInsightOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isInsightOpen]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -61,22 +75,16 @@ export function TopBar() {
   }, []);
 
   return (
-    <Panel
-      position="top-center"
-      className="m-4 md:m-8 z-50 pointer-events-none sm:pointer-events-auto w-fit bg-transparent!"
+    <div
+      className="fixed top-0 left-1/2 -translate-x-1/2 z-50 pt-4 md:pt-8 pointer-events-auto w-fit h-fit"
     >
-      <motion.header
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1, ease: "circOut" }}
-        className="flex items-center justify-center"
-      >
-        <div className="relative group/bar overflow-hidden">
+      <header className="flex items-center justify-center relative">
+        <div className="relative group/bar overflow-visible" ref={insightRef}>
           {/* Main Glass HUD */}
-          <section className="bg-background/20 backdrop-blur-3xl border border-white/10 rounded-full h-10 md:h-12 flex items-center shadow-2xl overflow-hidden">
+          <section className="bg-background/20 backdrop-blur-3xl border border-white/10 rounded-full h-10 md:h-12 flex items-center shadow-2xl overflow-hidden relative">
             {/* ID Section */}
             <article className="flex items-center gap-3 pl-5 pr-6 h-full bg-ui-primary/10 border-r border-ui-primary/20 relative group/id cursor-default">
-              <div className="w-1.5 h-1.5 rounded-full bg-ui-primary animate-pulse" />
+              <div className="w-1.5 h-1.5 rounded-full bg-ui-primary" />
               <div className="flex items-baseline gap-2">
                 <span className="text-[11px] font-black tracking-[0.2em]">
                   {PERSONAL_INFO.NAME.toUpperCase()}
@@ -94,15 +102,26 @@ export function TopBar() {
                 label="SYS"
                 value="ACTIVE"
                 active
-                className="px-3 md:px-4"
+                className="px-3"
               />
               <StatusItem
                 icon={Globe}
                 label="LOC"
                 value={PERSONAL_INFO.LOCATION}
-                className="hidden xs:flex px-3 md:px-4"
+                className="hidden xs:flex px-3"
               />
             </nav>
+
+            {/* Insight Trigger (Info Icon) */}
+            <article className="h-full flex items-center border-l border-white/5">
+               <button
+                 onClick={() => setIsInsightOpen(!isInsightOpen)}
+                 className={`px-4 h-full flex items-center justify-center transition-all hover:bg-white/5 ${isInsightOpen ? 'bg-ui-primary/10 text-ui-primary' : 'text-foreground/40 hover:text-ui-primary/80'}`}
+                 aria-label="Quick Insight"
+               >
+                 <Info size={14} strokeWidth={2.5} className={`${isInsightOpen ? 'scale-110' : ''} transition-transform`} />
+               </button>
+            </article>
 
             {/* Universal Clock - Desktop Only */}
             <time className="hidden sm:flex items-center h-full border-l border-white/5 bg-white/5 pl-5 pr-6 cursor-default">
@@ -118,10 +137,41 @@ export function TopBar() {
                 </span>
               </article>
             </time>
+
+            {/* Glitch Overlay Effect on hover */}
+            <div className="absolute inset-x-0 bottom-0 h-0.5 bg-ui-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 blur-[1px] pointer-events-none" />
           </section>
 
-          {/* Glitch Overlay Effect on hover */}
-          <div className="absolute inset-x-0 bottom-0 h-0.5 bg-ui-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 blur-[1px]" />
+          {/* Popover outside the overflow-hidden section */}
+          {isInsightOpen && (
+             <aside
+                style={{ transform: 'translateX(-50%)' }}
+                className="absolute top-[130%] left-1/2 w-64 md:w-80 p-5 rounded-3xl bg-background/90 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-60 overflow-hidden"
+             >
+                <div className="absolute top-0 left-0 w-full h-0.5 bg-ui-primary/30 overflow-hidden">
+                   <div className="w-1/2 h-full bg-ui-primary shadow-[0_0_10px_var(--ui-primary)]" />
+                </div>
+                
+                <div className="flex flex-col gap-3">
+                   <header className="flex items-center gap-2">
+                      <div className="p-1.5 rounded-lg bg-ui-primary/10 text-ui-primary">
+                         <Info size={12} strokeWidth={3} />
+                      </div>
+                      <span className="text-[10px] font-black tracking-[0.2em] text-ui-primary uppercase">Quick Insight</span>
+                   </header>
+                   <p className="text-[13px] font-medium leading-relaxed text-foreground/70">
+                      Mobile System Active: Navigation and advanced interactions are restricted. Please view on a Desktop for the full immersive experience.
+                   </p>
+                   <footer className="flex items-center justify-between pt-2 border-t border-white/5 opacity-40">
+                      <span className="text-[8px] font-mono tracking-widest uppercase">SY_INSIGHT_M1</span>
+                      <div className="flex gap-1">
+                         <div className="w-1 h-1 rounded-full bg-ui-primary" />
+                         <div className="w-1 h-1 rounded-full bg-foreground/20" />
+                      </div>
+                   </footer>
+                </div>
+             </aside>
+          )}
         </div>
 
         {/* Navigation Instructions HUD */}
@@ -142,7 +192,7 @@ export function TopBar() {
             </span>
           </article>
         </aside>
-      </motion.header>
-    </Panel>
+      </header>
+    </div>
   );
 }

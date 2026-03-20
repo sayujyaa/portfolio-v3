@@ -79,7 +79,7 @@ export function getFlowData(isMobile: boolean): FlowData {
   // Position nodes after projects
   const finalNodes = updatedOtherNodesPre.map((n) => {
     if (!preTypes.includes(n.type as string)) {
-      if (n.type === TYPE.CONTACT) postY += 0; // No extra gap before contact
+      if (n.type === TYPE.CONTACT) postY += 80; // Push contact a bit down on mobile
       const xOffset = n.type === TYPE.SKILLS ? 70 : -60;
       const isSkillsNode = n.type === TYPE.SKILLS;
       const newNode = {
