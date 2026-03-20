@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useReactFlow } from "@xyflow/react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronRight, Navigation2 } from "lucide-react";
+import { ChevronDown, Navigation2 } from "lucide-react";
 import { NAV_LINKS, VIEW_CONFIG } from "@/constants";
 
 export function Nav() {
@@ -39,14 +39,14 @@ export function Nav() {
 
   return (
     <main className="fixed bottom-6 right-6 z-50 overflow-visible">
-      <div className="flex items-end gap-4">
+      <div className="flex flex-col items-end gap-4">
         {/* Navigation Rail */}
         <AnimatePresence>
           {isOpen && (
             <motion.nav
-              initial={{ x: 50, opacity: 0, scale: 0.95 }}
-              animate={{ x: 0, opacity: 1, scale: 1 }}
-              exit={{ x: 50, opacity: 0, scale: 0.95 }}
+              initial={{ y: 20, opacity: 0, scale: 0.95 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 20, opacity: 0, scale: 0.95 }}
               className="flex flex-col gap-2.5 items-end"
             >
               {NAV_LINKS.map((link, idx) => (
@@ -89,7 +89,7 @@ export function Nav() {
               transition={{ duration: 0.2 }}
             >
               {isOpen ? (
-                <ChevronRight size={24} strokeWidth={3} />
+                <ChevronDown size={24} strokeWidth={3} />
               ) : (
                 <Navigation2 size={24} className="rotate-45" strokeWidth={3} />
               )}

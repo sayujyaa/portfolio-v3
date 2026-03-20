@@ -16,8 +16,13 @@ export const SKILLS = {
       VARIANT: "subtle",
     },
     {
+      TITLE: "Version Control",
+      LIST: ["Git", "GitHub"],
+      VARIANT: "subtle",
+    },
+    {
       TITLE: "AI & Tooling",
-      LIST: ["Claude Code", "Cursor", "Git", "GitHub"],
+      LIST: ["Codex", "Cursor"],
       VARIANT: "subtle",
     },
   ],
