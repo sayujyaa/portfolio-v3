@@ -83,6 +83,7 @@ export default function Portfolio() {
             maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
           }}
           onlyRenderVisibleElements
+          nodesDraggable={false}
         >
           <Nav />
           <div className="hidden md:block pointer-events-none absolute inset-0 z-0">
