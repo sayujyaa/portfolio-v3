@@ -84,6 +84,7 @@ export default function Portfolio() {
           }}
           onlyRenderVisibleElements
           nodesDraggable={false}
+          zoomOnPinch={false}
         >
           <Nav />
           <div className="hidden md:block pointer-events-none absolute inset-0 z-0">
