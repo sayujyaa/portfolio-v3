@@ -98,7 +98,7 @@ export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
-        minZoom={isMobile ? 0.85 : 0.2}
+        minZoom={isMobile ? 0.5 : 0.2}
         maxZoom={isMobile ? 1.15 : VIEW_CONFIG.MAX_ZOOM}
         nodesConnectable={false}
         connectOnClick={false}
