@@ -6,7 +6,7 @@ import HiddenHandle from "@/components/ui/HiddenHandle";
 
 export function ExperienceNode() {
   return (
-    <main className="relative px-6 md:px-12 py-8 md:py-12 rounded-[2.5rem] md:rounded-[3.5rem] backdrop-blur-3xl bg-background/40 border border-foreground/10 shadow-2xl w-80 md:w-md transition-all duration-700 group overflow-hidden">
+    <main className="relative px-6 md:px-12 py-8 md:py-12 rounded-[2.5rem] md:rounded-[3.5rem] backdrop-blur-xl md:backdrop-blur-3xl bg-background/80 md:bg-background/40 border border-foreground/10 shadow-xl md:shadow-2xl w-80 md:w-md transition-all duration-700 group overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-ui-primary to-transparent opacity-20" />
 
       <HiddenHandle type="target" position={Position.Top} />

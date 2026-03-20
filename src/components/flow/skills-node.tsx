@@ -32,7 +32,7 @@ export function SkillsNode() {
       <div className="absolute -inset-10 bg-ui-primary/10 blur-[100px] rounded-full group-hover:bg-ui-primary/30 transition-all duration-1000 opacity-60 pointer-events-none" />
       
       {/* Node Container */}
-      <section className="relative overflow-visible rounded-[2.5rem] border-2 border-ui-primary/20 bg-background/60 backdrop-blur-3xl p-6 md:p-10 shadow-[0_0_60px_-15px_var(--ui-primary)] transition-all duration-700 hover:border-ui-primary/40 hover:shadow-[0_0_100px_-10px_var(--ui-primary)]">
+      <section className="relative overflow-visible rounded-[2.5rem] border-2 border-ui-primary/20 bg-background/80 md:bg-background/60 backdrop-blur-xl md:backdrop-blur-3xl p-6 md:p-10 shadow-xl md:shadow-[0_0_60px_-15px_var(--ui-primary)] transition-all duration-700 hover:border-ui-primary/40 hover:shadow-[0_0_100px_-10px_var(--ui-primary)]">
         
         {/* Holographic Scanner Line - Removed by request */}
         
@@ -74,7 +74,7 @@ export function SkillsNode() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className={cn(
-                  "p-6 md:p-8 rounded-[2rem] relative overflow-hidden group/card backdrop-blur-md transition-all duration-500 hover:shadow-2xl",
+                  "p-6 md:p-8 rounded-[2rem] relative overflow-hidden group/card transition-all duration-500 hover:shadow-2xl",
                   isFeatured
                     ? "md:col-span-2 bg-linear-to-br from-ui-primary/10 to-transparent border border-ui-primary/30 hover:border-ui-primary/60 hover:shadow-ui-primary/20"
                     : "bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10"

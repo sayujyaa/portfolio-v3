@@ -85,7 +85,9 @@ export default function Portfolio() {
           onlyRenderVisibleElements
         >
           <Nav />
-          <Meteors count={30} />
+          <div className="hidden md:block pointer-events-none absolute inset-0 z-0">
+            <Meteors count={30} />
+          </div>
 
           <TopBar />
           <Background

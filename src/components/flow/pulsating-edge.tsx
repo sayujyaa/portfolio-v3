@@ -40,6 +40,7 @@ export function PulsatingEdge({
           stroke-dasharray: 0 40;
           animation: march 4s linear infinite;
           filter: drop-shadow(0 0 10px var(--ui-primary)) drop-shadow(0 0 2px #fff);
+          will-change: stroke-dashoffset, filter;
         }
 
         @media (max-width: 768px) {

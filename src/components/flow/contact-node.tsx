@@ -6,7 +6,7 @@ import HiddenHandle from "../ui/HiddenHandle";
 
 export function ContactNode() {
   return (
-    <main className="px-6 py-8 rounded-3xl backdrop-blur-xl bg-foreground/5 border border-foreground/10 shadow-2xl w-72 md:w-90 text-center transition-transform hover:-translate-y-2 duration-500 group relative overflow-hidden">
+    <main className="px-6 py-8 rounded-3xl backdrop-blur-md md:backdrop-blur-xl bg-background/80 md:bg-foreground/5 border border-foreground/10 shadow-xl md:shadow-2xl w-72 md:w-90 text-center transition-transform hover:-translate-y-2 duration-500 group relative overflow-hidden">
       <HiddenHandle type="target" position={Position.Top} />
 
       <figure className="inline-block p-4 rounded-2xl bg-ui-primary/10 mb-4 shadow-[0_0_20px_var(--ui-primary)]/20 group-hover:scale-110 transition-transform duration-500">
