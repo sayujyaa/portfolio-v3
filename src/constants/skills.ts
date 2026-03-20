@@ -15,5 +15,10 @@ export const SKILLS = {
       LIST: ["MongoDB", "PostgreSQL", "MySQL"],
       VARIANT: "subtle",
     },
+    {
+      TITLE: "AI & Tooling",
+      LIST: ["Claude Code", "Cursor", "Git", "GitHub"],
+      VARIANT: "subtle",
+    },
   ],
 } as const;

@@ -71,13 +71,13 @@ export const INITIAL_NODES = [
   {
     id: "skills-1",
     type: NODE_TYPES.SKILLS,
-    position: { x: -300, y: 2600 },
+    position: { x: -300, y: 2800 },
     data: { label: "Skills" },
   },
   {
     id: "contact-1",
     type: NODE_TYPES.CONTACT,
-    position: { x: 300, y: 3300 },
+    position: { x: 300, y: 3800 },
     data: { label: "Contact" },
   },
 ];

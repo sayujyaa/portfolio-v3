@@ -36,17 +36,17 @@ export function SkillsNode() {
           </figure>
         </header>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 font-mono">
           {SKILLS.CATEGORIES.map((cat, idx) => (
             <article
               key={idx}
               className={cn(
-                "p-6 rounded-[2rem] space-y-4",
+                "p-5 md:p-6 rounded-[1.5rem] md:rounded-[2rem] space-y-4",
                 idx === 0
-                  ? "col-span-2 bg-foreground/5 border border-foreground/5"
+                  ? "md:col-span-2 bg-foreground/5 border border-foreground/5"
                   : cat.VARIANT === "default"
                     ? "bg-ui-primary/10 border border-ui-primary/20"
-                    : "bg-foreground/5 border border-foreground/5",
+                    : "bg-foreground/5 border border-foreground/[0.03]",
               )}
             >
               <h3
@@ -59,18 +59,21 @@ export function SkillsNode() {
               </h3>
               <ul
                 className={
-                  idx === 0 ? "flex flex-wrap gap-2" : "grid grid-cols-2 gap-2"
+                  idx === 0 ? "flex flex-wrap gap-2" : "flex flex-col md:grid md:grid-cols-2 gap-2"
                 }
               >
                 {cat.LIST.map((skill) => (
-                  <li key={skill}>
+                  <li key={skill} className="flex items-center gap-2">
                     <span
-                      className={
+                      className={cn(
+                        "text-xs font-bold leading-none",
                         idx === 0
-                          ? "px-3 py-1.5 rounded-xl bg-background/50 border border-foreground/5 text-xs font-bold hover:bg-ui-primary hover:text-background transition-colors cursor-default"
-                          : "text-xs font-bold opacity-80"
-                      }
+                          ? "px-3 py-1.5 rounded-xl bg-background/50 border border-foreground/5 hover:bg-ui-primary hover:text-background transition-colors cursor-default"
+                          : "opacity-80",
+                        skill === "Claude Code" ? "text-ui-primary animate-pulse" : ""
+                      )}
                     >
+                      {skill === "Claude Code" ? <span className="opacity-60 text-[10px] mr-1 inline-block">[AI]</span> : null }
                       {skill}
                     </span>
                   </li>
