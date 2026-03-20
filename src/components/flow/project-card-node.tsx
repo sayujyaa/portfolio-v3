@@ -33,7 +33,7 @@ export const ProjectCardNode = memo(function ProjectCardNode({ data }: { data: P
       <HiddenHandle type="target" position={Position.Left} />
       <HiddenHandle type="source" position={Position.Right} />
 
-      <div className="relative bg-background/90 backdrop-blur-md md:backdrop-blur-3xl rounded-[1.8rem] p-6 md:p-8 h-full flex flex-col justify-between border border-foreground/5 shadow-xl md:shadow-2xl">
+      <div className="relative bg-background md:bg-background/90 md:backdrop-blur-3xl rounded-[1.8rem] p-6 md:p-8 h-full flex flex-col justify-between border border-foreground/5 shadow-xl md:shadow-2xl">
         <section className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
           <span className="text-8xl font-black">{data.year.slice(-2)}</span>
         </section>

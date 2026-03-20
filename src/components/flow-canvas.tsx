@@ -105,21 +105,25 @@ export function FlowCanvas() {
         }}
         nodesDraggable={!isMobile}
         zoomOnPinch={!isMobile}
-        onlyRenderVisibleElements={isMobile}
       >
         <Nav />
-        <div className="hidden md:block pointer-events-none absolute inset-0 z-0">
-          <Meteors count={30} />
-        </div>
+        {!isMobile && (
+          <div className="pointer-events-none absolute inset-0 z-0">
+            <Meteors count={30} />
+          </div>
+        )}
 
         <TopBar />
-        <Background
-          color="var(--ui-primary)"
-          variant={BackgroundVariant.Dots}
-          gap={20}
-          size={1}
-          className="opacity-[0.15]"
-        />
+        
+        {!isMobile && (
+          <Background
+            color="var(--ui-primary)"
+            variant={BackgroundVariant.Dots}
+            gap={20}
+            size={1}
+            className="opacity-[0.15]"
+          />
+        )}
         <ThemeSwitcher />
       </ReactFlow>
     </ReactFlowProvider>

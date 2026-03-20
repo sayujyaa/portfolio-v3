@@ -32,8 +32,7 @@ export const SkillsNode = memo(function SkillsNode() {
       {/* Main Aura Glow */}
       <div className="absolute -inset-10 bg-ui-primary/10 blur-[100px] rounded-full group-hover:bg-ui-primary/30 transition-all duration-1000 opacity-60 pointer-events-none" />
       
-      {/* Node Container */}
-      <section className="relative overflow-visible rounded-[2.5rem] border-2 border-ui-primary/20 bg-background/80 md:bg-background/60 backdrop-blur-xl md:backdrop-blur-3xl p-6 md:p-10 shadow-xl md:shadow-[0_0_60px_-15px_var(--ui-primary)] transition-all duration-700 hover:border-ui-primary/40 hover:shadow-[0_0_100px_-10px_var(--ui-primary)]">
+      <section className="relative overflow-visible rounded-[2.5rem] border-2 border-ui-primary/20 bg-background md:bg-background/60 xl:backdrop-blur-3xl md:backdrop-blur-3xl p-6 md:p-10 shadow-xl md:shadow-[0_0_60px_-15px_var(--ui-primary)] transition-all duration-700 hover:border-ui-primary/40 hover:shadow-[0_0_100px_-10px_var(--ui-primary)]">
         
         {/* Holographic Scanner Line - Removed by request */}
         

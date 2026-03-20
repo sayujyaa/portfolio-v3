@@ -18,7 +18,7 @@ const paintedFont = Caveat({
 
 export const IntroNode = memo(function IntroNode() {
   return (
-    <section className="relative px-6 md:px-12 py-8 md:py-16 rounded-[3rem] backdrop-blur-xl md:backdrop-blur-3xl bg-background/80 md:bg-background/20 border border-foreground/10 shadow-lg md:shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible nodrag cursor-pointer">
+    <section className="relative px-6 md:px-12 py-8 md:py-16 rounded-[3rem] bg-background md:bg-background/20 md:backdrop-blur-3xl border border-foreground/10 shadow-lg md:shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible nodrag cursor-pointer">
       {/* Animated Mesh Aura Background */}
       <figure className="absolute inset-4 -z-10 overflow-hidden rounded-[2.5rem] opacity-30 group-hover:opacity-50 transition-opacity duration-1000">
         <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] md:animate-[aura_15s_linear_infinite] bg-[radial-gradient(circle_at_center,var(--ui-primary)_0%,transparent_50%),radial-gradient(circle_at_30%_30%,var(--ui-tail)_0%,transparent_40%),radial-gradient(circle_at_70%_70%,var(--ui-primary)_0%,transparent_40%)] blur-3xl opacity-40 will-change-transform" />
@@ -91,7 +91,7 @@ export const IntroNode = memo(function IntroNode() {
 
       {/* Side-Sticking Scroll Tab */}
       <aside className="absolute top-1/2 -right-12 -translate-y-1/2 flex items-center group/scroll cursor-pointer select-none">
-        <div className="h-42 w-12 rounded-r-[2.5rem] border-2 border-l-0 border-ui-primary/40 bg-ui-primary/5 backdrop-blur-3xl flex flex-col items-center justify-center gap-3 pr-2 shadow-2xl transition-all duration-700 group-hover/scroll:bg-ui-primary/20 group-hover/scroll:pr-4">
+        <div className="h-42 w-12 rounded-r-[2.5rem] border-2 border-l-0 border-ui-primary/40 bg-background md:bg-ui-primary/5 md:backdrop-blur-3xl flex flex-col items-center justify-center gap-3 pr-2 shadow-2xl transition-all duration-700 group-hover/scroll:bg-ui-primary/20 group-hover/scroll:pr-4">
           <span className="text-[10px] font-black uppercase tracking-[0.5em] [writing-mode:vertical-lr] rotate-180 opacity-40">
             Explore
           </span>
