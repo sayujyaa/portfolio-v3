@@ -47,7 +47,10 @@ export function FlowCanvas() {
         setNodes((nds) =>
           nds.map((n) =>
             n.id === "contact-1"
-              ? { ...n, position: { x: n.position.x + 100, y: n.position.y + 450 } }
+              ? {
+                  ...n,
+                  position: { x: n.position.x + 100, y: n.position.y + 450 },
+                }
               : n,
           ),
         );
@@ -100,7 +103,6 @@ export function FlowCanvas() {
           nodes: [{ id: "intro-1" }],
           maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
         }}
-        onlyRenderVisibleElements
         nodesDraggable={false}
         zoomOnPinch={!isMobile}
       >
