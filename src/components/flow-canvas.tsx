@@ -9,6 +9,7 @@ import {
   Background,
   Connection,
   Edge,
+  Node,
   ReactFlowProvider,
   BackgroundVariant,
   PanOnScrollMode,
@@ -21,6 +22,7 @@ import { ExperienceNode } from "@/components/flow/projects-node";
 import { ProjectCardNode } from "@/components/flow/project-card-node";
 import { SkillsNode } from "@/components/flow/skills-node";
 import { ContactNode } from "@/components/flow/contact-node";
+import { MobileProjectsNode } from "@/components/flow/mobile-projects-node";
 import { PulsatingEdge } from "@/components/flow/pulsating-edge";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Meteors } from "@/components/background";
@@ -32,77 +34,35 @@ import {
   INITIAL_NODES,
   INITIAL_EDGES,
 } from "@/constants";
+import { getFlowData } from "@/lib/flow-utils";
 
-export function FlowCanvas() {
-  const [nodes, setNodes, onNodesChange] = useNodesState([...INITIAL_NODES]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(INITIAL_EDGES);
+interface FlowCanvasProps {
+  initialNodes?: Node[];
+  initialEdges?: Edge[];
+}
+
+export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes || [...INITIAL_NODES]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges || INITIAL_EDGES);
 
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const rafId = requestAnimationFrame(() => {
+    const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      if (mobile) {
-        setNodes((nds) => {
-          // Find the lowest Y among project cards to place remaining nodes below
-          const projectNodes = nds.filter((n) => n.type === TYPE.PROJECT_CARD);
-          const maxProjectY = Math.max(
-            ...projectNodes.map((n) => n.position.y),
-          );
-          const belowProjectsY = maxProjectY + 600; // clear space below project row
+      
+      const { nodes: newNodes, edges: newEdges } = getFlowData(mobile);
+      setNodes(newNodes);
+      setEdges(newEdges);
+    };
 
-          let preY = 0; // Y counter for nodes before projects
-          let postY = belowProjectsY; // Y counter for nodes after projects
-          const preTypes = [TYPE.INTRO, TYPE.CV, TYPE.EXPERIENCE];
-
-          return nds.map((n) => {
-            if (n.type === TYPE.PROJECT_CARD) {
-              return n; // keep horizontal positions
-            }
-
-            if (preTypes.includes(n.type as (typeof preTypes)[number])) {
-              const newNode = { ...n, position: { x: 0, y: preY } };
-              let h = 800;
-              if (n.type === TYPE.INTRO) h = 850;
-              if (n.type === TYPE.CV) h = 350;
-              if (n.type === TYPE.EXPERIENCE) h = 1200;
-              preY += h;
-              return newNode;
-            }
-
-            // Skills, Contact go below projects
-            if (n.type === TYPE.CONTACT) postY += 200; // extra gap before contact
-            const xOffset = n.type === TYPE.CONTACT ? 100 : 0;
-            const newNode = { ...n, position: { x: xOffset, y: postY } };
-            let h = 800;
-            if (n.type === TYPE.SKILLS) h = 1100;
-            if (n.type === TYPE.CONTACT) h = 400;
-            postY += h;
-            return newNode;
-          });
-        });
-
-        // Add edge from last project to skills
-        setEdges((eds) => {
-          const lastProject = INITIAL_NODES.filter(
-            (n) => n.type === TYPE.PROJECT_CARD,
-          ).pop();
-          if (!lastProject) return eds;
-          return [
-            ...eds,
-            {
-              id: "e-last-project-skills",
-              source: lastProject.id,
-              sourceHandle: "bottom",
-              target: "skills-1",
-              type: "pulsating",
-            },
-          ];
-        });
-      }
-    });
-    return () => cancelAnimationFrame(rafId);
+    const rafId = requestAnimationFrame(handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [setNodes, setEdges]);
 
   const nodeTypes = useMemo(
@@ -113,6 +73,7 @@ export function FlowCanvas() {
       [TYPE.PROJECT_CARD]: ProjectCardNode,
       [TYPE.SKILLS]: SkillsNode,
       [TYPE.CONTACT]: ContactNode,
+      [TYPE.MOBILE_PROJECTS]: MobileProjectsNode,
     }),
     [],
   );

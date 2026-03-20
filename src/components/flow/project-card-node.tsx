@@ -30,8 +30,8 @@ export const ProjectCardNode = memo(function ProjectCardNode({ data }: { data: P
 
   return (
     <main className="relative group p-1 rounded-[1.5rem] md:rounded-[2rem] bg-linear-to-br from-foreground/10 to-transparent hover:from-ui-primary/40 hover:to-ui-primary/10 transition-all duration-700 w-80 md:w-96 overflow-hidden">
-      <HiddenHandle type="target" position={Position.Left} />
-      <HiddenHandle type="source" position={Position.Right} />
+      <HiddenHandle type="target" position={Position.Left} id="left" />
+      <HiddenHandle type="source" position={Position.Right} id="right" />
       <HiddenHandle type="target" position={Position.Top} id="top" />
       <HiddenHandle type="source" position={Position.Bottom} id="bottom" />
 
@@ -54,7 +54,30 @@ export const ProjectCardNode = memo(function ProjectCardNode({ data }: { data: P
             {data.description}
           </p>
 
-          <article className="flex flex-col gap-3 relative z-20">
+          {/* Mobile Icon Navigation */}
+          <article className="flex md:hidden items-center gap-4 mt-2">
+            {data.github && (
+              <a
+                href={data.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-2xl bg-ui-primary/10 text-ui-primary border border-ui-primary/20 shadow-lg shadow-ui-primary/10 transition-transform active:scale-90"
+              >
+                <Github size={20} strokeWidth={2.5} />
+              </a>
+            )}
+            <a
+              href={data.link || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-2xl bg-ui-primary text-background border border-white/10 shadow-lg shadow-ui-primary/30 transition-transform active:scale-90"
+            >
+              <Link2 size={20} strokeWidth={2.5} />
+            </a>
+          </article>
+
+          {/* Desktop Text-based Navigation */}
+          <article className="hidden md:flex flex-col gap-3 relative z-20">
             {data.github && (
               <a
                 href={data.github}

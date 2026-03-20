@@ -1,4 +1,4 @@
-import { Edge } from "@xyflow/react";
+import { Edge, Node } from "@xyflow/react";
 import { PROJECTS } from "./content";
 
 export const NODE_TYPES = {
@@ -31,7 +31,7 @@ export const SORTED_PROJECTS = [...PROJECTS].sort(
   (a, b) => parseInt(b.YEAR) - parseInt(a.YEAR),
 );
 
-export const INITIAL_NODES = [
+export const INITIAL_NODES: Node[] = [
   {
     id: "intro-1",
     type: NODE_TYPES.INTRO,
