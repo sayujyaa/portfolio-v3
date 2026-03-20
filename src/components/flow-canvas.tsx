@@ -169,13 +169,6 @@ export function FlowCanvas() {
             className="opacity-[0.15]"
           />
         )}
-        {isMobile && (
-          <div className="fixed right-2 top-1/2 -translate-y-1/2 z-50 pointer-events-none">
-            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-foreground/20 [writing-mode:vertical-rl] rotate-180 select-none">
-              Lost? Use the navigator ↗
-            </span>
-          </div>
-        )}
         <ThemeSwitcher />
       </ReactFlow>
     </ReactFlowProvider>

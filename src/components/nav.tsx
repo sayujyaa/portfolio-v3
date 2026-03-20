@@ -74,28 +74,49 @@ export function Nav() {
         </AnimatePresence>
 
         {/* Control Button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-14 h-14 rounded-2xl bg-ui-primary text-background flex items-center justify-center shadow-[0_10px_30px_rgba(var(--ui-primary-rgb),0.5)] border-4 border-white/10 transition-transform z-10"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={isOpen ? "open" : "closed"}
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {isOpen ? (
-                <ChevronDown size={24} strokeWidth={3} />
-              ) : (
-                <Navigation2 size={24} className="rotate-45" strokeWidth={3} />
-              )}
-            </motion.div>
+        <div className="relative flex items-center">
+          <AnimatePresence>
+            {!isOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0, transition: { delay: 1 } }}
+                exit={{ opacity: 0, transition: { duration: 0 } }}
+                className="absolute bottom-full -right-1.5 mb-8 flex flex-col items-end gap-6 pointer-events-none md:hidden"
+              >
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/30 [writing-mode:vertical-rl] rotate-180 select-none whitespace-nowrap">
+                  Lost? Use this navigator
+                </span>
+              </motion.div>
+            )}
           </AnimatePresence>
-        </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-14 h-14 rounded-2xl bg-ui-primary text-background flex items-center justify-center shadow-[0_10px_30px_rgba(var(--ui-primary-rgb),0.5)] border-4 border-white/10 transition-transform z-10"
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={isOpen ? "open" : "closed"}
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isOpen ? (
+                  <ChevronDown size={24} strokeWidth={3} />
+                ) : (
+                  <Navigation2
+                    size={24}
+                    className="rotate-45"
+                    strokeWidth={3}
+                  />
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </motion.button>
+        </div>
       </div>
     </main>
   );
