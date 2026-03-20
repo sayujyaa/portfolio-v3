@@ -94,6 +94,7 @@ export function FlowCanvas() {
             {
               id: "e-last-project-skills",
               source: lastProject.id,
+              sourceHandle: "bottom",
               target: "skills-1",
               type: "pulsating",
             },

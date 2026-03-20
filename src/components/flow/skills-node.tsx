@@ -30,14 +30,14 @@ export const SkillsNode = memo(function SkillsNode() {
       />
 
       {/* Main Aura Glow */}
-      <div className="absolute -inset-10 bg-ui-primary/10 blur-[100px] rounded-full group-hover:bg-ui-primary/30 transition-all duration-1000 opacity-60 pointer-events-none" />
+      <div className="hidden md:block absolute -inset-10 bg-ui-primary/10 blur-[100px] rounded-full group-hover:bg-ui-primary/30 transition-all duration-1000 opacity-60 pointer-events-none" />
       
-      <section className="relative overflow-visible rounded-[2.5rem] border-2 border-ui-primary/20 bg-background md:bg-background/60 xl:backdrop-blur-3xl md:backdrop-blur-3xl p-6 md:p-10 shadow-xl md:shadow-[0_0_60px_-15px_var(--ui-primary)] transition-all duration-700 hover:border-ui-primary/40 hover:shadow-[0_0_100px_-10px_var(--ui-primary)]">
+      <section className="relative overflow-visible rounded-[2.5rem] border-2 border-ui-primary/20 bg-background md:bg-background/60 xl:backdrop-blur-3xl md:backdrop-blur-3xl p-6 md:p-10 shadow-none md:shadow-[0_0_60px_-15px_var(--ui-primary)] transition-all duration-700 hover:border-ui-primary/40 md:hover:shadow-[0_0_100px_-10px_var(--ui-primary)]">
         
         {/* Holographic Scanner Line - Removed by request */}
         
         {/* Grid Background Pattern */}
-        <div className="absolute inset-0 rounded-[2.5rem] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-size-[30px_30px] mask-[radial-gradient(ellipse_70%_70%_at_50%_0%,#000_80%,transparent_100%)] opacity-30 pointer-events-none" />
+        <div className="hidden md:block absolute inset-0 rounded-[2.5rem] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-size-[30px_30px] mask-[radial-gradient(ellipse_70%_70%_at_50%_0%,#000_80%,transparent_100%)] opacity-30 pointer-events-none" />
 
         <header className="relative z-10 flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-foreground/10 pb-6 gap-4">
           <div className="space-y-3">
