@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Position } from "@xyflow/react";
 import Image from "next/image";
 import { Caveat } from "next/font/google";
@@ -15,7 +16,7 @@ const paintedFont = Caveat({
   weight: "700",
 });
 
-export function IntroNode() {
+export const IntroNode = memo(function IntroNode() {
   return (
     <section className="relative px-6 md:px-12 py-8 md:py-16 rounded-[3rem] backdrop-blur-xl md:backdrop-blur-3xl bg-background/80 md:bg-background/20 border border-foreground/10 shadow-lg md:shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible nodrag cursor-pointer">
       {/* Animated Mesh Aura Background */}
@@ -130,4 +131,4 @@ export function IntroNode() {
       `}</style>
     </section>
   );
-}
+});

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Position, useReactFlow } from "@xyflow/react";
 import { ArrowRight, ArrowLeft, Github, Link2 } from "lucide-react";
 import { VIEW_CONFIG } from "@/constants";
@@ -14,7 +15,7 @@ interface ProjectData {
   prevId?: string;
 }
 
-export function ProjectCardNode({ data }: { data: ProjectData }) {
+export const ProjectCardNode = memo(function ProjectCardNode({ data }: { data: ProjectData }) {
   const { fitView } = useReactFlow();
 
   const handleSwitch = (targetId?: string) => {
@@ -118,4 +119,4 @@ export function ProjectCardNode({ data }: { data: ProjectData }) {
       </div>
     </main>
   );
-}
+});

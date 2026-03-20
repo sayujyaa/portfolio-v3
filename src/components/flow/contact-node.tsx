@@ -1,10 +1,11 @@
+import { memo } from "react";
 import { Position } from "@xyflow/react";
 
 import { PERSONAL_INFO, SOCIALS } from "@/constants";
 import { Mail } from "lucide-react";
 import HiddenHandle from "../ui/HiddenHandle";
 
-export function ContactNode() {
+export const ContactNode = memo(function ContactNode() {
   return (
     <main className="px-6 py-8 rounded-3xl backdrop-blur-md md:backdrop-blur-xl bg-background/80 md:bg-foreground/5 border border-foreground/10 shadow-xl md:shadow-2xl w-72 md:w-90 text-center transition-transform hover:-translate-y-2 duration-500 group relative overflow-hidden">
       <HiddenHandle type="target" position={Position.Top} />
@@ -41,4 +42,4 @@ export function ContactNode() {
       </p>
     </main>
   );
-}
+});

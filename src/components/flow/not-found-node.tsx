@@ -1,12 +1,14 @@
 "use client";
 
+import { memo } from "react";
+
 import { Position } from "@xyflow/react";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import HiddenHandle from "../ui/HiddenHandle";
 
-export function NotFoundNode() {
+export const NotFoundNode = memo(function NotFoundNode() {
   return (
     <main className="relative p-1 rounded-[2.5rem] bg-linear-to-br from-red-500/20 to-transparent border border-red-500/10 shadow-[0_0_50px_rgba(239,68,68,0.1)] w-80 md:w-96 overflow-hidden">
       <HiddenHandle type="target" position={Position.Top} />
@@ -62,4 +64,4 @@ export function NotFoundNode() {
       </div>
     </main>
   );
-}
+});

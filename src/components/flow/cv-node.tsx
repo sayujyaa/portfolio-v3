@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { Handle, Position } from "@xyflow/react";
 import { Circle, Download } from "lucide-react";
 import { PERSONAL_INFO } from "@/constants";
 
-export function CVNode() {
+export const CVNode = memo(function CVNode() {
   return (
     <a 
       href={PERSONAL_INFO.CV_LINK} 
@@ -50,4 +51,4 @@ export function CVNode() {
       />
     </a>
   );
-}
+});

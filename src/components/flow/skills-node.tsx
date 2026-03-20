@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Position } from "@xyflow/react";
 import { Cpu, Layers, Database, Bot, Zap, Code2, Server } from "lucide-react";
 import { motion } from "motion/react";
@@ -14,7 +15,7 @@ const ICONS: Record<string, React.ElementType> = {
   "AI & Tooling": Bot,
 };
 
-export function SkillsNode() {
+export const SkillsNode = memo(function SkillsNode() {
   return (
     <div className="relative group w-85 md:w-175 nodrag cursor-pointer">
       <HiddenHandle
@@ -123,4 +124,4 @@ export function SkillsNode() {
 
     </div>
   );
-}
+});
