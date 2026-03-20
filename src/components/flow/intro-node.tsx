@@ -21,16 +21,16 @@ export const IntroNode = memo(function IntroNode() {
     <section className="relative px-6 md:px-12 py-8 md:py-16 rounded-[3rem] backdrop-blur-xl md:backdrop-blur-3xl bg-background/80 md:bg-background/20 border border-foreground/10 shadow-lg md:shadow-[0_0_100px_-20px_var(--ui-primary)]/20 w-80 md:w-115 max-w-lg text-center transition-all duration-700 group hover:shadow-[0_0_120px_-10px_var(--ui-primary)]/40 overflow-visible nodrag cursor-pointer">
       {/* Animated Mesh Aura Background */}
       <figure className="absolute inset-4 -z-10 overflow-hidden rounded-[2.5rem] opacity-30 group-hover:opacity-50 transition-opacity duration-1000">
-        <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] animate-[aura_15s_linear_infinite] bg-[radial-gradient(circle_at_center,var(--ui-primary)_0%,transparent_50%),radial-gradient(circle_at_30%_30%,var(--ui-tail)_0%,transparent_40%),radial-gradient(circle_at_70%_70%,var(--ui-primary)_0%,transparent_40%)] blur-3xl opacity-40 will-change-transform" />
+        <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] md:animate-[aura_15s_linear_infinite] bg-[radial-gradient(circle_at_center,var(--ui-primary)_0%,transparent_50%),radial-gradient(circle_at_30%_30%,var(--ui-tail)_0%,transparent_40%),radial-gradient(circle_at_70%_70%,var(--ui-primary)_0%,transparent_40%)] blur-3xl opacity-40 will-change-transform" />
       </figure>
 
       {/* Floating Geometric Embellishments */}
-      <aside className="absolute -top-6 -left-6 w-12 h-12 flex items-center justify-center opacity-20 animate-[float_4s_ease-in-out_infinite] group-hover:opacity-100 transition-opacity pointer-events-none">
+      <aside className="absolute -top-6 -left-6 w-12 h-12 flex items-center justify-center opacity-20 md:animate-[float_4s_ease-in-out_infinite] group-hover:opacity-100 transition-opacity pointer-events-none">
         <span className="w-1 h-8 bg-ui-primary rounded-full rotate-45" />
         <span className="w-1 h-8 bg-ui-primary rounded-full -rotate-45 absolute" />
       </aside>
 
-      <span className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full border-2 border-dashed border-ui-primary/30 animate-[spin_8s_linear_infinite] opacity-50 pointer-events-none" />
+      <span className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full border-2 border-dashed border-ui-primary/30 md:animate-[spin_8s_linear_infinite] opacity-50 pointer-events-none" />
 
       {/* Status Badge */}
       <p className="absolute flex items-center gap-2 -top-4 -right-4 px-5 py-2 rounded-2xl bg-ui-primary text-background text-[11px] font-black uppercase tracking-[0.2em] shadow-2xl shadow-ui-primary/40 rotate-6 group-hover:rotate-0 transition-transform duration-700 z-50 not-italic">
@@ -42,8 +42,8 @@ export const IntroNode = memo(function IntroNode() {
 
       {/* Profile Image */}
       <figure className="relative mx-auto w-48 h-48 mb-8 group-hover:scale-105 transition-transform duration-1000">
-        <div className="absolute inset-0 rounded-full border-2 border-ui-primary opacity-20 scale-110 animate-[pulse_3s_ease-in-out_infinite]" />
-        <div className="absolute inset-0 rounded-full border-2 border-ui-primary/10 scale-125 animate-[pulse_4s_ease-in-out_infinite_1s]" />
+        <div className="absolute inset-0 rounded-full border-2 border-ui-primary opacity-20 scale-110 md:animate-[pulse_3s_ease-in-out_infinite]" />
+        <div className="absolute inset-0 rounded-full border-2 border-ui-primary/10 scale-125 md:animate-[pulse_4s_ease-in-out_infinite_1s]" />
         <section className="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-[0_0_50px_-10px_var(--ui-primary)]/40 relative z-10 transition-shadow duration-1000 group-hover:shadow-[0_0_80px_0_var(--ui-primary)]/60">
           <Image
             src={myImage}
@@ -95,7 +95,7 @@ export const IntroNode = memo(function IntroNode() {
           <span className="text-[10px] font-black uppercase tracking-[0.5em] [writing-mode:vertical-lr] rotate-180 opacity-40">
             Explore
           </span>
-          <div className="animate-[bounce-y_2s_infinite]">
+          <div className="md:animate-[bounce-y_2s_infinite]">
             <ChevronDown className="text-ui-primary size-4" />
           </div>
         </div>

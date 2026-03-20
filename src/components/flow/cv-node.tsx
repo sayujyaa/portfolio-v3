@@ -36,7 +36,7 @@ export const CVNode = memo(function CVNode() {
           </h3>
 
           <article className="flex items-center gap-2">
-            <Circle className="text-ui-primary fill-ui-primary size-2 animate-pulse" />
+            <Circle className="text-ui-primary fill-ui-primary size-2 md:animate-pulse" />
             <p className="text-[10px] font-black uppercase tracking-widest opacity-40">
               {PERSONAL_INFO.CV_SUBTITLE}
             </p>

@@ -43,7 +43,7 @@ export const SkillsNode = memo(function SkillsNode() {
         <header className="relative z-10 flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-foreground/10 pb-6 gap-4">
           <div className="space-y-3">
             <div className="flex items-center gap-3 text-ui-primary mb-2">
-              <Cpu size={20} className="animate-pulse" />
+              <Cpu size={20} className="md:animate-pulse" />
               <span className="text-[11px] font-black uppercase tracking-[0.4em] bg-ui-primary/10 px-3 py-1 rounded-full border border-ui-primary/20">
                 System Architecture
               </span>
@@ -55,10 +55,10 @@ export const SkillsNode = memo(function SkillsNode() {
           <div className="flex md:flex-col items-center md:items-end gap-3 md:gap-2">
             <div className="flex items-center justify-center size-12 rounded-2xl bg-ui-primary/10 border border-ui-primary/30 text-ui-primary shadow-inner shadow-ui-primary/20 relative overflow-hidden group/icon">
               <span className="absolute inset-0 bg-ui-primary/20 scale-0 group-hover/icon:scale-100 transition-transform duration-500 rounded-2xl" />
-              <Zap size={24} className="fill-ui-primary/30 animate-[pulse_2s_linear_infinite] relative z-10" />
+              <Zap size={24} className="fill-ui-primary/30 md:animate-[pulse_2s_linear_infinite] relative z-10" />
             </div>
             <p className="text-[9px] font-mono tracking-widest opacity-60 uppercase flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-ui-primary animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-ui-primary md:animate-ping" />
               Operational
             </p>
           </div>
@@ -108,7 +108,7 @@ export const SkillsNode = memo(function SkillsNode() {
                       )}
                     >
                       {skill === "Codex" || skill === "Next.js" ? (
-                        <span className={cn("inline-block w-2 h-2 rounded-full animate-pulse shadow-sm",
+                        <span className={cn("inline-block w-2 h-2 rounded-full md:animate-pulse shadow-sm",
                           skill === "Codex" ? "bg-[#D97757] shadow-[#D97757]" : "bg-ui-primary shadow-ui-primary"
                         )} />
                       ) : null }
