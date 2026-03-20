@@ -47,7 +47,7 @@ export function getFlowData(isMobile: boolean): FlowData {
       };
       let h = 550; // Decreased further
       if (n.type === TYPE.INTRO) h = 820;
-      if (n.type === TYPE.CV) h = 200;
+      if (n.type === TYPE.CV) h = 280;
       if (n.type === TYPE.EXPERIENCE) h = 900; // Corrected height to match component better
       preY += h;
       return newNode;
@@ -55,7 +55,7 @@ export function getFlowData(isMobile: boolean): FlowData {
     return n;
   });
 
-  const containerY = preY - 100; // Pull container up a bit more
+  const containerY = preY - 40; // Add a bit more gap after journey before projects
   const containerNode: Node = {
     id: "projects-container",
     type: TYPE.MOBILE_PROJECTS,
@@ -75,15 +75,20 @@ export function getFlowData(isMobile: boolean): FlowData {
     extent: "parent" as const,
   }));
 
-  let postY = containerY + containerHeight + 140; // Further reduced spacing after projects
+  let postY = containerY + containerHeight + 90; // Tighter spacing after projects
   // Position nodes after projects
   const finalNodes = updatedOtherNodesPre.map((n) => {
     if (!preTypes.includes(n.type as string)) {
-      if (n.type === TYPE.CONTACT) postY += 300; // Increased gap before contact
+      if (n.type === TYPE.CONTACT) postY += 0; // No extra gap before contact
       const xOffset = n.type === TYPE.SKILLS ? 70 : -60;
-      const newNode = { ...n, position: { x: xOffset, y: postY } };
+      const isSkillsNode = n.type === TYPE.SKILLS;
+      const newNode = {
+        ...n,
+        type: isSkillsNode ? TYPE.MOBILE_SKILLS : n.type,
+        position: { x: xOffset, y: postY },
+      };
       let h = 800; // Restored to 800
-      if (n.type === TYPE.SKILLS) h = 1100; // Restored to 1100
+      if (n.type === TYPE.SKILLS) h = 700; // Significantly reduce skills-to-contact spacing
       if (n.type === TYPE.CONTACT) h = 400; // Restored to 400
       postY += h;
       return newNode;

@@ -21,6 +21,7 @@ import { CVNode } from "@/components/flow/cv-node";
 import { ExperienceNode } from "@/components/flow/projects-node";
 import { ProjectCardNode } from "@/components/flow/project-card-node";
 import { SkillsNode } from "@/components/flow/skills-node";
+import { MobileSkillsNode } from "@/components/flow/mobile-skills-node";
 import { ContactNode } from "@/components/flow/contact-node";
 import { MobileProjectsNode } from "@/components/flow/mobile-projects-node";
 import { PulsatingEdge } from "@/components/flow/pulsating-edge";
@@ -72,6 +73,7 @@ export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
       [TYPE.EXPERIENCE]: ExperienceNode,
       [TYPE.PROJECT_CARD]: ProjectCardNode,
       [TYPE.SKILLS]: SkillsNode,
+      [TYPE.MOBILE_SKILLS]: MobileSkillsNode,
       [TYPE.CONTACT]: ContactNode,
       [TYPE.MOBILE_PROJECTS]: MobileProjectsNode,
     }),

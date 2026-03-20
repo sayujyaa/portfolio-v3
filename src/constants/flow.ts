@@ -7,6 +7,7 @@ export const NODE_TYPES = {
   EXPERIENCE: "experience",
   PROJECT_CARD: "project-card",
   SKILLS: "skills",
+  MOBILE_SKILLS: "mobile-skills",
   CONTACT: "contact",
   MOBILE_PROJECTS: "mobile-projects",
 } as const;
