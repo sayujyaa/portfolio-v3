@@ -2,9 +2,16 @@
 
 import { memo } from "react";
 import { Position } from "@xyflow/react";
-import { Cpu } from "lucide-react";
+import { Bot, Cpu, Database, Layers, Server, Code2 } from "lucide-react";
 import { SKILLS } from "@/constants";
 import HiddenHandle from "@/components/ui/HiddenHandle";
+
+const ICONS: Record<string, React.ElementType> = {
+  "Client Side": Layers,
+  "Server Side": Server,
+  Database: Database,
+  "AI & Tooling": Bot,
+};
 
 export const MobileSkillsNode = memo(function MobileSkillsNode() {
   return (
@@ -20,9 +27,12 @@ export const MobileSkillsNode = memo(function MobileSkillsNode() {
       </header>
 
       <div className="space-y-4">
-        {SKILLS.CATEGORIES.map((category) => (
+        {SKILLS.CATEGORIES.map((category) => {
+          const Icon = ICONS[category.TITLE] || Code2;
+          return (
           <article key={category.TITLE}>
-            <p className="mb-2 text-xs font-black uppercase tracking-[0.18em] text-foreground/60">
+            <p className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-foreground/60">
+              <Icon size={14} className="text-ui-primary" />
               {category.TITLE}
             </p>
             <ul className="flex flex-wrap gap-2">
@@ -36,7 +46,8 @@ export const MobileSkillsNode = memo(function MobileSkillsNode() {
               ))}
             </ul>
           </article>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
