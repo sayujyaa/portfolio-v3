@@ -1,13 +1,11 @@
 "use client";
 
-import { useMemo, useCallback, useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import {
   ReactFlow,
   useNodesState,
   useEdgesState,
-  addEdge,
   Background,
-  Connection,
   Edge,
   Node,
   ReactFlowProvider,
@@ -91,11 +89,6 @@ export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
     [],
   );
 
-  const onConnect = useCallback(
-    (params: Connection | Edge) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
-  );
-
   return (
     <ReactFlowProvider>
       <ReactFlow
@@ -103,18 +96,21 @@ export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
-        minZoom={0.2}
-        maxZoom={VIEW_CONFIG.MAX_ZOOM}
+        minZoom={isMobile ? 0.85 : 0.2}
+        maxZoom={isMobile ? 1.15 : VIEW_CONFIG.MAX_ZOOM}
+        nodesConnectable={false}
+        connectOnClick={false}
         panOnScroll
         panOnScrollMode={PanOnScrollMode.Free}
         fitView
         fitViewOptions={{
-          padding: VIEW_CONFIG.NODE_FOCUS_PADDING,
+          padding: { top: 0.5, bottom: 0.2, left: 0, right: 0 },
           nodes: [{ id: "intro-1" }],
-          maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
+          maxZoom: isMobile
+            ? VIEW_CONFIG.INITIAL_ZOOM
+            : VIEW_CONFIG.INITIAL_ZOOM + 0.15,
         }}
         nodesDraggable={!isMobile}
         // zoomOnPinch={!isMobile}

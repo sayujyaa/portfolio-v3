@@ -9,6 +9,7 @@ import { NAV_LINKS, VIEW_CONFIG } from "@/constants";
 export function Nav() {
   const { fitView } = useReactFlow();
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleGoTo = useCallback(
     (id: string) => {
@@ -16,7 +17,7 @@ export function Nav() {
         void fitView({
           nodes: [{ id }],
           duration: 800,
-          padding: VIEW_CONFIG.NODE_FOCUS_PADDING,
+          padding: { top: 0.5, bottom: 0.2, left: 0, right: 0 },
           maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
         });
       }, 50);
@@ -29,6 +30,7 @@ export function Nav() {
     // This avoids the "synchronous setState in effect" cascading render warning
     const rafId = requestAnimationFrame(() => {
       const isStartMobile = window.innerWidth < 768;
+      setIsMobile(isStartMobile);
       setIsOpen(!isStartMobile);
     });
 
@@ -91,8 +93,8 @@ export function Nav() {
           </AnimatePresence>
 
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={isMobile ? undefined : { scale: 1.1 }}
+            whileTap={isMobile ? { scale: 0.97 } : { scale: 0.9 }}
             onClick={() => setIsOpen(!isOpen)}
             className="w-14 h-14 rounded-2xl bg-ui-primary text-background flex items-center justify-center shadow-[0_10px_30px_rgba(var(--ui-primary-rgb),0.5)] border-4 border-white/10 transition-transform z-10"
           >
@@ -102,7 +104,7 @@ export function Nav() {
                 initial={{ rotate: -90, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: isMobile ? 0.12 : 0.2 }}
               >
                 {isOpen ? (
                   <ChevronDown size={24} strokeWidth={3} />

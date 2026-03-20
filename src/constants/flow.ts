@@ -15,14 +15,14 @@ export const NODE_TYPES = {
 export const VIEW_CONFIG = {
   PADDING: {
     MOBILE: 0.5,
-    DESKTOP: 0.8,
-    INITIAL: { top: 100, bottom: 100, left: 100, right: 100 },
+    DESKTOP: 0.5,
+    INITIAL: { top: 120, bottom: 100, left: 100, right: 100 },
   },
   INTRO_FOCUS_PADDING: {
     MOBILE: { top: 190, bottom: 110, left: 36, right: 36 },
     DESKTOP: { top: 220, bottom: 140, left: 72, right: 72 },
   },
-  NODE_FOCUS_PADDING: 0.5,
+  NODE_FOCUS_PADDING: 0.35,
   DURATION: 1100,
   MAX_ZOOM: 2,
   INITIAL_ZOOM: 1,
