@@ -44,20 +44,65 @@ export function FlowCanvas() {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
       if (mobile) {
-        setNodes((nds) =>
-          nds.map((n) =>
-            n.id === "contact-1"
-              ? {
-                  ...n,
-                  position: { x: n.position.x + 100, y: n.position.y + 450 },
-                }
-              : n,
-          ),
-        );
+        setNodes((nds) => {
+          // Find the lowest Y among project cards to place remaining nodes below
+          const projectNodes = nds.filter((n) => n.type === TYPE.PROJECT_CARD);
+          const maxProjectY = Math.max(
+            ...projectNodes.map((n) => n.position.y),
+          );
+          const belowProjectsY = maxProjectY + 600; // clear space below project row
+
+          let preY = 0; // Y counter for nodes before projects
+          let postY = belowProjectsY; // Y counter for nodes after projects
+          const preTypes = [TYPE.INTRO, TYPE.CV, TYPE.EXPERIENCE];
+
+          return nds.map((n) => {
+            if (n.type === TYPE.PROJECT_CARD) {
+              return n; // keep horizontal positions
+            }
+
+            if (preTypes.includes(n.type as (typeof preTypes)[number])) {
+              const newNode = { ...n, position: { x: 0, y: preY } };
+              let h = 800;
+              if (n.type === TYPE.INTRO) h = 850;
+              if (n.type === TYPE.CV) h = 350;
+              if (n.type === TYPE.EXPERIENCE) h = 1200;
+              preY += h;
+              return newNode;
+            }
+
+            // Skills, Contact go below projects
+            if (n.type === TYPE.CONTACT) postY += 200; // extra gap before contact
+            const xOffset = n.type === TYPE.CONTACT ? 100 : 0;
+            const newNode = { ...n, position: { x: xOffset, y: postY } };
+            let h = 800;
+            if (n.type === TYPE.SKILLS) h = 1100;
+            if (n.type === TYPE.CONTACT) h = 400;
+            postY += h;
+            return newNode;
+          });
+        });
+
+        // Add edge from last project to skills
+        setEdges((eds) => {
+          const lastProject = INITIAL_NODES.filter(
+            (n) => n.type === TYPE.PROJECT_CARD,
+          ).pop();
+          if (!lastProject) return eds;
+          return [
+            ...eds,
+            {
+              id: "e-last-project-skills",
+              source: lastProject.id,
+              target: "skills-1",
+              type: "pulsating",
+            },
+          ];
+        });
       }
     });
     return () => cancelAnimationFrame(rafId);
-  }, [setNodes]);
+  }, [setNodes, setEdges]);
 
   const nodeTypes = useMemo(
     () => ({
@@ -114,7 +159,7 @@ export function FlowCanvas() {
         )}
 
         <TopBar />
-        
+
         {!isMobile && (
           <Background
             color="var(--ui-primary)"
@@ -123,6 +168,13 @@ export function FlowCanvas() {
             size={1}
             className="opacity-[0.15]"
           />
+        )}
+        {isMobile && (
+          <div className="fixed right-2 top-1/2 -translate-y-1/2 z-50 pointer-events-none">
+            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-foreground/20 [writing-mode:vertical-rl] rotate-180 select-none">
+              Lost? Use the navigator ↗
+            </span>
+          </div>
         )}
         <ThemeSwitcher />
       </ReactFlow>

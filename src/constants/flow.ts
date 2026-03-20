@@ -8,6 +8,7 @@ export const NODE_TYPES = {
   PROJECT_CARD: "project-card",
   SKILLS: "skills",
   CONTACT: "contact",
+  MOBILE_PROJECTS: "mobile-projects",
 } as const;
 
 export const VIEW_CONFIG = {

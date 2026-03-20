@@ -32,6 +32,8 @@ export const ProjectCardNode = memo(function ProjectCardNode({ data }: { data: P
     <main className="relative group p-1 rounded-[1.5rem] md:rounded-[2rem] bg-linear-to-br from-foreground/10 to-transparent hover:from-ui-primary/40 hover:to-ui-primary/10 transition-all duration-700 w-80 md:w-96 overflow-hidden">
       <HiddenHandle type="target" position={Position.Left} />
       <HiddenHandle type="source" position={Position.Right} />
+      <HiddenHandle type="target" position={Position.Top} id="top" />
+      <HiddenHandle type="source" position={Position.Bottom} id="bottom" />
 
       <div className="relative bg-background md:bg-background/90 md:backdrop-blur-3xl rounded-[1.8rem] p-6 md:p-8 h-full flex flex-col justify-between border border-foreground/5 shadow-xl md:shadow-2xl">
         <section className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
