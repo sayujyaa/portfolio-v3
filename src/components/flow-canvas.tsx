@@ -43,8 +43,12 @@ interface FlowCanvasProps {
 }
 
 export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes || [...INITIAL_NODES]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges || INITIAL_EDGES);
+  const [nodes, setNodes, onNodesChange] = useNodesState(
+    initialNodes || [...INITIAL_NODES],
+  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState(
+    initialEdges || INITIAL_EDGES,
+  );
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -52,7 +56,7 @@ export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      
+
       const { nodes: newNodes, edges: newEdges } = getFlowData(mobile);
       setNodes(newNodes);
       setEdges(newEdges);
@@ -113,7 +117,8 @@ export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
           maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
         }}
         nodesDraggable={!isMobile}
-        zoomOnPinch={!isMobile}
+        // zoomOnPinch={!isMobile}
+        onlyRenderVisibleElements={isMobile}
       >
         <Nav />
         {!isMobile && (
