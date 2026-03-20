@@ -103,7 +103,7 @@ export function FlowCanvas() {
           nodes: [{ id: "intro-1" }],
           maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
         }}
-        nodesDraggable={false}
+        nodesDraggable={!isMobile}
         zoomOnPinch={!isMobile}
         onlyRenderVisibleElements={isMobile}
       >
