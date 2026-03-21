@@ -112,8 +112,8 @@ export function TopBar() {
               />
             </nav>
 
-            {/* Insight Trigger (Info Icon) */}
-            <article className="h-full flex items-center border-l border-white/5">
+            {/* Quick Insight — mobile only (desktop gets full experience) */}
+            <article className="h-full flex items-center border-l border-white/5 md:hidden">
                <button
                  onClick={() => setIsInsightOpen(!isInsightOpen)}
                  className={`px-4 h-full flex items-center justify-center transition-all hover:bg-white/5 ${isInsightOpen ? 'bg-ui-primary/10 text-ui-primary' : 'text-foreground/40 hover:text-ui-primary/80'}`}
@@ -146,7 +146,7 @@ export function TopBar() {
           {isInsightOpen && (
              <aside
                 style={{ transform: 'translateX(-50%)' }}
-                className="absolute top-[130%] left-1/2 w-64 md:w-80 p-5 rounded-3xl bg-background/90 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-60 overflow-hidden"
+                className="absolute top-[130%] left-1/2 z-60 w-64 p-5 md:hidden rounded-3xl bg-background/90 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden"
              >
                 <div className="absolute top-0 left-0 w-full h-0.5 bg-ui-primary/30 overflow-hidden">
                    <div className="w-1/2 h-full bg-ui-primary shadow-[0_0_10px_var(--ui-primary)]" />
