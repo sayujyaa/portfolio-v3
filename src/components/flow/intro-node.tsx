@@ -24,12 +24,6 @@ export const IntroNode = memo(function IntroNode() {
         <span className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] md:animate-[aura_15s_linear_infinite] bg-[radial-gradient(circle_at_center,var(--ui-primary)_0%,transparent_50%),radial-gradient(circle_at_30%_30%,var(--ui-tail)_0%,transparent_40%),radial-gradient(circle_at_70%_70%,var(--ui-primary)_0%,transparent_40%)] blur-3xl opacity-40 will-change-transform" />
       </figure>
 
-      {/* Floating Geometric Embellishments */}
-      <aside className="absolute -top-6 -left-6 w-12 h-12 flex items-center justify-center opacity-20 md:animate-[float_4s_ease-in-out_infinite] group-hover:opacity-100 transition-opacity pointer-events-none">
-        <span className="w-1 h-8 bg-ui-primary rounded-full rotate-45" />
-        <span className="w-1 h-8 bg-ui-primary rounded-full -rotate-45 absolute" />
-      </aside>
-
       <span className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full border-2 border-dashed border-ui-primary/30 md:animate-[spin_8s_linear_infinite] opacity-50 pointer-events-none" />
 
       {/* Status Badge */}
