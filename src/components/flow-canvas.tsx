@@ -1,93 +1,75 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   ReactFlow,
+  ReactFlowProvider,
   useNodesState,
   useEdgesState,
-  Background,
-  Edge,
-  Node,
-  ReactFlowProvider,
-  BackgroundVariant,
   PanOnScrollMode,
+  type Edge,
+  type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
 import { IntroNode } from "@/components/flow/intro-node";
 import { CVNode } from "@/components/flow/cv-node";
-import { ExperienceNode } from "@/components/flow/projects-node";
-import { ProjectCardNode } from "@/components/flow/project-card-node";
+import { BuildLogNode } from "@/components/flow/build-log-node";
+import { WorkIndexNode } from "@/components/flow/work-index-node";
 import { SkillsNode } from "@/components/flow/skills-node";
-import { MobileSkillsNode } from "@/components/flow/mobile-skills-node";
 import { ContactNode } from "@/components/flow/contact-node";
-import { MobileProjectsNode } from "@/components/flow/mobile-projects-node";
-import { PulsatingEdge } from "@/components/flow/pulsating-edge";
+import { SignalEdge } from "@/components/flow/signal-edge";
+import { CanvasGrid } from "@/components/canvas-grid";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { Meteors } from "@/components/background";
 import { Nav } from "@/components/nav";
 import { TopBar } from "@/components/top-bar";
-import {
-  NODE_TYPES as TYPE,
-  VIEW_CONFIG,
-  INITIAL_NODES,
-  INITIAL_EDGES,
-} from "@/constants";
+import { ProjectPanel } from "@/components/project-panel";
+import { NODE_TYPES as TYPE, EDGE_TYPE, VIEW_CONFIG } from "@/constants";
 import { getFlowData } from "@/lib/flow-utils";
 
+// Defined at module scope so React Flow never sees a new object identity.
+const nodeTypes = {
+  [TYPE.INTRO]: IntroNode,
+  [TYPE.CV]: CVNode,
+  [TYPE.BUILD_LOG]: BuildLogNode,
+  [TYPE.WORK]: WorkIndexNode,
+  [TYPE.SKILLS]: SkillsNode,
+  [TYPE.CONTACT]: ContactNode,
+};
+const edgeTypes = { [EDGE_TYPE]: SignalEdge };
+
+const MOBILE_BREAKPOINT = 768;
+
 interface FlowCanvasProps {
-  initialNodes?: Node[];
-  initialEdges?: Edge[];
+  initialNodes: Node[];
+  initialEdges: Edge[];
 }
 
 export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
-  const [nodes, setNodes, onNodesChange] = useNodesState(
-    initialNodes || [...INITIAL_NODES],
-  );
-  const [edges, setEdges, onEdgesChange] = useEdgesState(
-    initialEdges || INITIAL_EDGES,
-  );
-
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [isMobile, setIsMobile] = useState(false);
 
+  // The server guesses mobile vs desktop from the user agent; correct it
+  // here from the real viewport, and only re-layout when the mode flips.
   useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth < 768;
+    let current: boolean | null = null;
+    const sync = () => {
+      const mobile = window.innerWidth < MOBILE_BREAKPOINT;
+      if (mobile === current) return;
+      current = mobile;
       setIsMobile(mobile);
-
-      const { nodes: newNodes, edges: newEdges } = getFlowData(mobile);
-      setNodes(newNodes);
-      setEdges(newEdges);
+      const data = getFlowData(mobile);
+      setNodes(data.nodes);
+      setEdges(data.edges);
     };
-
-    const rafId = requestAnimationFrame(handleResize);
-    window.addEventListener("resize", handleResize);
+    const frame = requestAnimationFrame(sync);
+    window.addEventListener("resize", sync);
     return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", sync);
     };
   }, [setNodes, setEdges]);
-
-  const nodeTypes = useMemo(
-    () => ({
-      [TYPE.INTRO]: IntroNode,
-      [TYPE.CV]: CVNode,
-      [TYPE.EXPERIENCE]: ExperienceNode,
-      [TYPE.PROJECT_CARD]: ProjectCardNode,
-      [TYPE.SKILLS]: SkillsNode,
-      [TYPE.MOBILE_SKILLS]: MobileSkillsNode,
-      [TYPE.CONTACT]: ContactNode,
-      [TYPE.MOBILE_PROJECTS]: MobileProjectsNode,
-    }),
-    [],
-  );
-
-  const edgeTypes = useMemo(
-    () => ({
-      pulsating: PulsatingEdge,
-    }),
-    [],
-  );
 
   return (
     <ReactFlowProvider>
@@ -101,41 +83,23 @@ export function FlowCanvas({ initialNodes, initialEdges }: FlowCanvasProps) {
         minZoom={isMobile ? 0.5 : 0.2}
         maxZoom={isMobile ? 1.15 : VIEW_CONFIG.MAX_ZOOM}
         nodesConnectable={false}
-        connectOnClick={false}
+        nodesDraggable={!isMobile}
         panOnScroll
         panOnScrollMode={PanOnScrollMode.Free}
         fitView
         fitViewOptions={{
-          padding: { top: 0.5, bottom: 0.2, left: 0, right: 0 },
           nodes: [{ id: "intro-1" }],
-          maxZoom: isMobile
-            ? VIEW_CONFIG.INITIAL_ZOOM
-            : VIEW_CONFIG.INITIAL_ZOOM + 0.15,
+          padding: VIEW_CONFIG.FOCUS_PADDING,
+          maxZoom: VIEW_CONFIG.INITIAL_ZOOM,
         }}
-        nodesDraggable={!isMobile}
-        // zoomOnPinch={!isMobile}
         onlyRenderVisibleElements={isMobile}
       >
-        <Nav />
-        {!isMobile && (
-          <div className="pointer-events-none absolute inset-0 z-0">
-            <Meteors count={30} />
-          </div>
-        )}
-
+        <CanvasGrid />
         <TopBar />
-
-        {!isMobile && (
-          <Background
-            color="var(--ui-primary)"
-            variant={BackgroundVariant.Dots}
-            gap={20}
-            size={1}
-            className="opacity-[0.15]"
-          />
-        )}
+        <Nav />
         <ThemeSwitcher />
       </ReactFlow>
+      <ProjectPanel />
     </ReactFlowProvider>
   );
 }

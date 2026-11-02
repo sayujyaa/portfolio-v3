@@ -1,45 +1,67 @@
 import { memo } from "react";
 import { Position } from "@xyflow/react";
+import { ArrowUpRight } from "lucide-react";
 
 import { PERSONAL_INFO, SOCIALS } from "@/constants";
-import { Mail } from "lucide-react";
-import HiddenHandle from "../ui/HiddenHandle";
+import { Sheet } from "@/components/ui/sheet";
+import { StatusDot } from "@/components/ui/status-dot";
+import HiddenHandle from "@/components/ui/HiddenHandle";
 
 export const ContactNode = memo(function ContactNode() {
   return (
-    <main className="px-6 py-8 rounded-3xl bg-background border border-foreground/30 md:border-foreground/10 md:bg-foreground/5 md:backdrop-blur-xl shadow-xl md:shadow-2xl w-72 md:w-90 text-center transition-transform hover:-translate-y-2 duration-500 group relative overflow-hidden">
+    <Sheet
+      index="06"
+      label="Contact"
+      meta={
+        <span className="flex items-center gap-2 text-ok">
+          <StatusDot />
+          {PERSONAL_INFO.STATUS}
+        </span>
+      }
+      className="w-80 md:w-[30rem]"
+    >
       <HiddenHandle type="target" position={Position.Top} />
 
-      <figure className="inline-block p-4 rounded-2xl bg-ui-primary/10 mb-4 shadow-[0_0_20px_var(--ui-primary)]/20 group-hover:scale-110 transition-transform duration-500">
-        <Mail className="text-ui-primary size-10" />
-      </figure>
-
-      <header>
-        <h2 className="text-3xl font-black bg-clip-text text-transparent bg-linear-to-r from-ui-primary to-foreground mb-2">
-          Let&apos;s Connect
+      <div className="p-6 md:p-9">
+        <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+          Let&apos;s build something.
         </h2>
-        <p className="text-sm text-foreground/60 font-medium mb-6">
+        <p className="mt-4 text-[15px] leading-relaxed text-muted">
           {PERSONAL_INFO.CONTACT_SUBTITLE}
         </p>
-      </header>
 
-      <section className="flex justify-center gap-4">
-        {SOCIALS.map(({ ICON: Icon, HREF }, idx) => (
-          <a
-            key={idx}
-            href={HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full bg-foreground/5 hover:bg-ui-primary/20 hover:text-ui-primary transition-colors duration-300"
-          >
-            <Icon size={20} />
-          </a>
-        ))}
-      </section>
+        <a
+          href={`mailto:${PERSONAL_INFO.EMAIL}`}
+          className="nodrag group mt-7 flex items-center justify-between gap-3 border border-ui-primary bg-ui-primary px-4 py-3.5 text-on-primary transition-colors hover:bg-transparent hover:text-ui-primary"
+        >
+          <span className="truncate font-mono text-sm">{PERSONAL_INFO.EMAIL}</span>
+          <ArrowUpRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </a>
 
-      <p className="mt-8 text-[9px] font-black uppercase tracking-[0.4em] opacity-20">
-        {PERSONAL_INFO.COPYRIGHT}
-      </p>
-    </main>
+        <ul className="mt-4 divide-y divide-line border-y border-line">
+          {SOCIALS.filter((s) => s.LABEL !== "Email").map(
+            ({ LABEL, HANDLE, ICON: Icon, HREF }) => (
+              <li key={LABEL}>
+                <a
+                  href={HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nodrag group flex items-center gap-3 py-3 text-sm transition-colors hover:text-ui-primary"
+                >
+                  <Icon className="size-4 text-muted group-hover:text-ui-primary" />
+                  <span className="font-medium">{LABEL}</span>
+                  <span className="ml-auto font-mono text-[11px] text-muted">
+                    {HANDLE}
+                  </span>
+                  <ArrowUpRight className="size-3.5 text-muted group-hover:text-ui-primary" />
+                </a>
+              </li>
+            ),
+          )}
+        </ul>
+
+        <p className="label-mono mt-8">{PERSONAL_INFO.COPYRIGHT}</p>
+      </div>
+    </Sheet>
   );
 });

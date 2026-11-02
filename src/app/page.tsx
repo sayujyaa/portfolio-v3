@@ -10,7 +10,7 @@ export default async function Portfolio() {
   const { nodes, edges } = getFlowData(isMobile);
 
   return (
-    <main className="w-full h-screen bg-background text-foreground overflow-hidden selection:bg-ui-primary selection:text-background">
+    <main className="w-full h-screen bg-background text-foreground overflow-hidden">
       <FlowCanvas initialNodes={nodes} initialEdges={edges} />
     </main>
   );

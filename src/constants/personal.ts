@@ -1,27 +1,45 @@
-import { Mail, Linkedin, Github, Lock } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 export const PERSONAL_INFO = {
   NAME: "Sayujya",
+  FULL_NAME: "Sayujya Satyal",
   ROLE: "Full Stack Developer",
+  TAGLINE:
+    "I build web products end to end. Lately I spend more time designing the system than typing the code.",
   LOCATION: "Nepal",
-  EXPERIENCE_YEARS: "1+ Years",
-  STATUS: {
-    LABEL: "Working",
-    ICON: Lock,
-  },
-  CV_VERSION: "v1.0",
-  CV_SUBTITLE: "DOWNLOAD PDF",
+  TIME_ZONE: "Asia/Kathmandu",
+  TIME_ZONE_LABEL: "KTM",
+  STATUS: "Open to work",
+  SPECS: [
+    { LABEL: "Based in", VALUE: "Nepal" },
+    { LABEL: "Building", VALUE: "Since 2024" },
+    { LABEL: "Focus", VALUE: "Frontend & systems" },
+  ],
   CV_LINK: "/my-cv.pdf",
+  CV_FILENAME: "Sayujya_Satyal_CV.pdf",
+  EMAIL: "sayujya57@gmail.com",
   CONTACT_SUBTITLE:
-    "I'm always open to new opportunities and interesting projects.",
-  COPYRIGHT: "Sayujya © 2026",
+    "Open to full-time roles and interesting freelance work. If you're building something with a hard frontend or a system to design, I'd like to hear about it.",
+  COPYRIGHT: `© ${new Date().getFullYear()} Sayujya Satyal`,
 } as const;
 
 export const SOCIALS = [
-  { ICON: Github, HREF: "https://github.com/sayujyaa" },
   {
+    LABEL: "GitHub",
+    HANDLE: "sayujyaa",
+    ICON: Github,
+    HREF: "https://github.com/sayujyaa",
+  },
+  {
+    LABEL: "LinkedIn",
+    HANDLE: "sayujya-satyal",
     ICON: Linkedin,
     HREF: "https://www.linkedin.com/in/sayujya-satyal-3452b5217/",
   },
-  { ICON: Mail, HREF: "mailto:sayujya57@gmail.com" },
+  {
+    LABEL: "Email",
+    HANDLE: "sayujya57@gmail.com",
+    ICON: Mail,
+    HREF: "mailto:sayujya57@gmail.com",
+  },
 ] as const;

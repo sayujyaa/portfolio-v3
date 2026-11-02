@@ -1,133 +1,97 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { Sun, CloudSun, Cloud, Moon, MoonStar, Sparkles } from "lucide-react";
-import { useThemeStore } from "@/store/theme-store";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { Palette } from "lucide-react";
 
-const THEMES = [
-  { id: 1, icon: Sun, label: "Daylight" },
-  { id: 2, icon: CloudSun, label: "Cream" },
-  { id: 3, icon: Cloud, label: "Gloaming" },
-  { id: 4, icon: Moon, label: "Twilight" },
-  { id: 5, icon: MoonStar, label: "Space" },
-  { id: 6, icon: Sparkles, label: "Void" },
-];
+import { THEMES, useThemeStore } from "@/store/theme-store";
+import { cn } from "@/lib/utils";
 
 export function ThemeSwitcher() {
   const { level, setLevel } = useThemeStore();
-  const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const switcherRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      setMounted(true);
-      document.documentElement.setAttribute("data-level", level.toString());
-    });
-    return () => cancelAnimationFrame(frame);
+    document.documentElement.setAttribute("data-level", String(level));
   }, [level]);
 
-  // Handle outside click to close
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen && switcherRef.current && !switcherRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
+    if (!isOpen) return;
+    const close = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setIsOpen(false);
     };
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
   }, [isOpen]);
 
-  if (!mounted) return null;
-
   return (
-    <>
-      {/* Mobile Toggle Button */}
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 left-6 z-60 md:hidden p-4 rounded-full bg-background/80 backdrop-blur-2xl border border-foreground/10 shadow-2xl text-ui-primary active:scale-90 transition-transform"
-      >
-        <Sparkles size={24} />
-      </button>
-
-      {/* Backdrop for Mobile */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 md:hidden bg-background/10 backdrop-blur-md"
-            onClick={() => setIsOpen(false)}
-          />
+    <div
+      ref={ref}
+      className="fixed bottom-4 left-4 z-50 flex flex-col items-start gap-2 md:top-1/2 md:bottom-auto md:left-6 md:-translate-y-1/2"
+    >
+      <div
+        role="radiogroup"
+        aria-label="Theme"
+        className={cn(
+          "flex-col border border-line bg-surface/90 backdrop-blur-md md:flex",
+          isOpen ? "flex" : "hidden",
         )}
-      </AnimatePresence>
-
-      {/* Main Rail - Desktop: Fixed left | Mobile: Overlaid drawer */}
-      <div 
-        ref={switcherRef}
-        className={`
-          fixed left-0 top-0 bottom-0 z-50 flex items-center transition-all duration-700
-          ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
-          px-4 md:px-6 bg-background/5 md:bg-transparent backdrop-blur-3xl md:backdrop-blur-none py-12
-      `}>
-        {/* Vertical THEMES wording */}
-        <div className="flex flex-col items-center justify-center mr-6 select-none opacity-40">
-          <span className="text-[10px] font-black uppercase tracking-[0.5em] rotate-180 [writing-mode:vertical-lr] text-foreground">
-            Themes
-          </span>
-        </div>
-
-        <div className="relative flex flex-col items-start justify-center gap-2 h-auto">
-          {THEMES.map((theme, idx) => {
-            const Icon = theme.icon;
-            const isActive = level === theme.id;
-            const isBig = theme.id % 2 !== 0;
-
-            return (
-              <motion.div
-                key={theme.id}
-                initial={isOpen ? { x: -25, opacity: 0 } : false}
-                animate={isOpen ? { x: 0, opacity: 1 } : { x: 0, opacity: 1 }}
-                transition={{ delay: idx * 0.05 }}
-                className="relative flex items-center group/item h-12"
+      >
+        <p className="label-mono border-b border-line px-3 py-3 text-[10px]">
+          Theme
+        </p>
+        {THEMES.map((theme) => {
+          const active = level === theme.id;
+          return (
+            <button
+              key={theme.id}
+              type="button"
+              role="radio"
+              aria-checked={active}
+              onClick={() => {
+                setLevel(theme.id);
+                setIsOpen(false);
+              }}
+              title={theme.label}
+              className={cn(
+                "group flex items-center gap-3 px-3 py-2.5 transition-colors hover:bg-foreground/[0.05]",
+                active && "bg-foreground/[0.06]",
+              )}
+            >
+              <span
+                className={cn(
+                  "relative size-5 border",
+                  active ? "border-ui-primary" : "border-line",
+                )}
+                style={{ background: theme.bg }}
               >
-                <button
-                  onClick={() => {
-                    setLevel(theme.id);
-                    setIsOpen(false);
-                  }}
-                  className="relative flex items-center gap-6 cursor-pointer focus:outline-none transition-all group"
-                >
-                  <div
-                    className={`transition-all duration-500 rounded-full ${
-                      isActive
-                        ? "h-3 opacity-100 shadow-[0_0_15px_var(--ui-primary)]"
-                        : "h-1 opacity-50 group-hover:opacity-80"
-                    }`}
-                    style={{
-                      backgroundColor: "var(--ui-primary)",
-                      width: isBig ? "48px" : "24px",
-                    }}
-                  />
-
-                  <div
-                    className={`transition-all duration-300 ${isActive ? "scale-110" : "opacity-40 group-hover:opacity-80"}`}
-                    style={{
-                      color: isActive ? "var(--ui-primary)" : "currentColor",
-                    }}
-                  >
-                    <Icon size={20} strokeWidth={isActive ? 3 : 1.5} />
-                  </div>
-                </button>
-              </motion.div>
-            );
-          })}
-        </div>
+                <span
+                  className="absolute right-0.5 bottom-0.5 size-1.5"
+                  style={{ background: theme.accent }}
+                />
+              </span>
+              <span
+                className={cn(
+                  "font-mono text-[11px] md:hidden",
+                  active ? "text-ui-primary" : "text-muted",
+                )}
+              >
+                {theme.label}
+              </span>
+            </button>
+          );
+        })}
       </div>
-    </>
+
+      <button
+        type="button"
+        onClick={() => setIsOpen((o) => !o)}
+        aria-label="Change theme"
+        aria-expanded={isOpen}
+        className="grid size-12 place-items-center border border-line bg-surface/90 text-ui-primary backdrop-blur-md active:scale-95 md:hidden"
+      >
+        <Palette className="size-5" />
+      </button>
+    </div>
   );
 }
